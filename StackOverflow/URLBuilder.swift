@@ -23,9 +23,9 @@ enum Order: String {
 }
 
 class URLBuilder {
-    static func searchQuestion(containing query: String, sortedBy sort: Sorting, displayOrder order: Order, tags: String...) -> String {
-        
+    static func searchQuestion(containing query: String, sortedBy sort: Sorting, displayOrder order: Order, tags: String...) -> URL? {
         var components = URLComponents()
+        
         components.scheme = "https"
         components.host = "api.stackexchange.com"
         components.path = "/2.2/search"
@@ -37,6 +37,6 @@ class URLBuilder {
             URLQueryItem(name: "site", value: "stackoverflow")
         ]
 
-        return components.url?.absoluteString ?? "Error"
+        return components.url
     }
 }

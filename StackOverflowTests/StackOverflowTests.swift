@@ -10,6 +10,7 @@ import XCTest
 @testable import StackOverflow
 
 // swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 class StackOverflowTests: XCTestCase {
     
     let viewController = ViewController()
@@ -28,8 +29,11 @@ class StackOverflowTests: XCTestCase {
         XCTAssertNotNil(viewController.mainView.controller)
     }
     
-    func testURLBuilder() {
-//        let url = urlbu
+    func testSearchQuestionsURL() throws {
+        let url = try XCTUnwrap(URLBuilder.searchQuestion(containing: "hello", sortedBy: .activity, displayOrder: .desc, tags: "swift", "iOS", "Xcode"))
+        
+        XCTAssertEqual(url.absoluteString, "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=swift;iOS;Xcode&intitle=hello&site=stackoverflow")
+        XCTAssertNotEqual(url.absoluteString, "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=swift,iOS,Xcode&intitle=hello&site=stackoverflow")
     }
 
     func testPerformanceExample() {
