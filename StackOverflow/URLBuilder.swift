@@ -37,8 +37,6 @@ class URLBuilder {
             URLQueryItem(name: "site", value: "stackoverflow")
         ]
 
-        // Getting a URL from our components is as simple as
-        // accessing the 'url' property.
         return components.url?.absoluteString ?? "Error"
     }
 }

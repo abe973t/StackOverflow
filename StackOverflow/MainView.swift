@@ -12,10 +12,10 @@ import UIKit
 class MainView: UIView {
     
     let searchBar: UISearchBar = {
-        let sB = UISearchBar()
-        sB.translatesAutoresizingMaskIntoConstraints = false
-        sB.barStyle = .black
-        return sB
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.barStyle = .black
+        return searchBar
     }()
     
     let tableView: UITableView = {

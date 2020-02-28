@@ -9,6 +9,7 @@
 import UIKit
 
 // swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 class ViewController: UIViewController {
     
     /**
@@ -28,7 +29,7 @@ class ViewController: UIViewController {
         
         navigationController?.navigationBar.barTintColor = .black
         
-        URLBuilder.searchQuestion(containing: "hello", sortedBy: .activity, displayOrder: .desc, tags: "swift", "iOS", "Xcode")
+        print(URLBuilder.searchQuestion(containing: "hello", sortedBy: .activity, displayOrder: .desc, tags: "swift", "iOS", "Xcode"))
     }
     
 }
