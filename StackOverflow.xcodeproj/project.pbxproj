@@ -16,6 +16,8 @@
 		0490C0AE24087E560093B0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0490C0AC24087E560093B0BE /* LaunchScreen.storyboard */; };
 		0490C0B924087E560093B0BE /* StackOverflowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0B824087E560093B0BE /* StackOverflowTests.swift */; };
 		0490C0C424087E570093B0BE /* StackOverflowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0C324087E570093B0BE /* StackOverflowUITests.swift */; };
+		0490C0D224087E660093B0BE /* StackOverflowProjectRequirments.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0490C0D124087E660093B0BE /* StackOverflowProjectRequirments.pdf */; };
+		0490C0D52408A8730093B0BE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0D42408A8730093B0BE /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		0490C0BF24087E570093B0BE /* StackOverflowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StackOverflowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0490C0C324087E570093B0BE /* StackOverflowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackOverflowUITests.swift; sourceTree = "<group>"; };
 		0490C0C524087E570093B0BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0490C0D124087E660093B0BE /* StackOverflowProjectRequirments.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = StackOverflowProjectRequirments.pdf; sourceTree = "<group>"; };
+		0490C0D42408A8730093B0BE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 		0490C09224087E510093B0BE = {
 			isa = PBXGroup;
 			children = (
+				0490C0D124087E660093B0BE /* StackOverflowProjectRequirments.pdf */,
 				0490C09D24087E510093B0BE /* StackOverflow */,
 				0490C0B724087E560093B0BE /* StackOverflowTests */,
 				0490C0C224087E570093B0BE /* StackOverflowUITests */,
@@ -104,6 +109,7 @@
 				0490C09E24087E510093B0BE /* AppDelegate.swift */,
 				0490C0A024087E510093B0BE /* SceneDelegate.swift */,
 				0490C0A224087E510093B0BE /* ViewController.swift */,
+				0490C0D42408A8730093B0BE /* MainView.swift */,
 				0490C0A424087E510093B0BE /* Main.storyboard */,
 				0490C0AA24087E560093B0BE /* Assets.xcassets */,
 				0490C0AC24087E560093B0BE /* LaunchScreen.storyboard */,
@@ -141,6 +147,7 @@
 				0490C09724087E510093B0BE /* Sources */,
 				0490C09824087E510093B0BE /* Frameworks */,
 				0490C09924087E510093B0BE /* Resources */,
+				0490C0D32408A65C0093B0BE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -238,6 +245,7 @@
 				0490C0AE24087E560093B0BE /* LaunchScreen.storyboard in Resources */,
 				0490C0AB24087E560093B0BE /* Assets.xcassets in Resources */,
 				0490C0A624087E510093B0BE /* Main.storyboard in Resources */,
+				0490C0D224087E660093B0BE /* StackOverflowProjectRequirments.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +265,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0490C0D32408A65C0093B0BE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Type a script or drag a script file from your workspace to insert its path.\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0490C09724087E510093B0BE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -265,6 +293,7 @@
 				0490C0A924087E510093B0BE /* StackOverflow.xcdatamodeld in Sources */,
 				0490C0A324087E510093B0BE /* ViewController.swift in Sources */,
 				0490C09F24087E510093B0BE /* AppDelegate.swift in Sources */,
+				0490C0D52408A8730093B0BE /* MainView.swift in Sources */,
 				0490C0A124087E510093B0BE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
