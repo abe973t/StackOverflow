@@ -25,19 +25,24 @@ class MainView: UIView {
         return tblView
     }()
     
-    var controller: UIViewController?
+    weak var controller: UIViewController?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.backgroundColor = .white
-        addSubview(searchBar)
-        addSubview(tableView)
-        addContraints()
+        addViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addViews() {
+        addSubview(searchBar)
+        addSubview(tableView)
+        
+        addContraints()
     }
     
     func addContraints() {
