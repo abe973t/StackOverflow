@@ -11,6 +11,13 @@ import UIKit
 // swiftlint:disable trailing_whitespace
 class ViewController: UIViewController {
     
+    /**
+     TODO:
+        - Build URL Builder - test - commit
+        - Build Models - test - commit
+        - Build UI on paper - implement - test - commit
+     */
+    
     let mainView = MainView()
 
     override func viewDidLoad() {
@@ -20,6 +27,8 @@ class ViewController: UIViewController {
         view = mainView
         
         navigationController?.navigationBar.barTintColor = .black
+        
+        URLBuilder.searchQuestion(containing: "hello", sortedBy: .activity, displayOrder: .desc, tags: "swift", "iOS", "Xcode")
     }
     
 }

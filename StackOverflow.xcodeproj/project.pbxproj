@@ -10,7 +10,6 @@
 		0490C09F24087E510093B0BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C09E24087E510093B0BE /* AppDelegate.swift */; };
 		0490C0A124087E510093B0BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0A024087E510093B0BE /* SceneDelegate.swift */; };
 		0490C0A324087E510093B0BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0A224087E510093B0BE /* ViewController.swift */; };
-		0490C0A624087E510093B0BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0490C0A424087E510093B0BE /* Main.storyboard */; };
 		0490C0A924087E510093B0BE /* StackOverflow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0A724087E510093B0BE /* StackOverflow.xcdatamodeld */; };
 		0490C0AB24087E560093B0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0490C0AA24087E560093B0BE /* Assets.xcassets */; };
 		0490C0AE24087E560093B0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0490C0AC24087E560093B0BE /* LaunchScreen.storyboard */; };
@@ -18,6 +17,7 @@
 		0490C0C424087E570093B0BE /* StackOverflowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0C324087E570093B0BE /* StackOverflowUITests.swift */; };
 		0490C0D224087E660093B0BE /* StackOverflowProjectRequirments.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0490C0D124087E660093B0BE /* StackOverflowProjectRequirments.pdf */; };
 		0490C0D52408A8730093B0BE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0D42408A8730093B0BE /* MainView.swift */; };
+		0490C0D72408B4380093B0BE /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0D62408B4380093B0BE /* URLBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,6 @@
 		0490C09E24087E510093B0BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0490C0A024087E510093B0BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0490C0A224087E510093B0BE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0490C0A524087E510093B0BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0490C0A824087E510093B0BE /* StackOverflow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StackOverflow.xcdatamodel; sourceTree = "<group>"; };
 		0490C0AA24087E560093B0BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0490C0AD24087E560093B0BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,6 +54,8 @@
 		0490C0C524087E570093B0BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0490C0D124087E660093B0BE /* StackOverflowProjectRequirments.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = StackOverflowProjectRequirments.pdf; sourceTree = "<group>"; };
 		0490C0D42408A8730093B0BE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		0490C0D62408B4380093B0BE /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
+		0496EAE324094FAB003B2772 /* StackOverflow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StackOverflow.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,11 +107,12 @@
 		0490C09D24087E510093B0BE /* StackOverflow */ = {
 			isa = PBXGroup;
 			children = (
+				0496EAE324094FAB003B2772 /* StackOverflow.entitlements */,
 				0490C09E24087E510093B0BE /* AppDelegate.swift */,
 				0490C0A024087E510093B0BE /* SceneDelegate.swift */,
 				0490C0A224087E510093B0BE /* ViewController.swift */,
+				0490C0D62408B4380093B0BE /* URLBuilder.swift */,
 				0490C0D42408A8730093B0BE /* MainView.swift */,
-				0490C0A424087E510093B0BE /* Main.storyboard */,
 				0490C0AA24087E560093B0BE /* Assets.xcassets */,
 				0490C0AC24087E560093B0BE /* LaunchScreen.storyboard */,
 				0490C0AF24087E560093B0BE /* Info.plist */,
@@ -244,7 +246,6 @@
 			files = (
 				0490C0AE24087E560093B0BE /* LaunchScreen.storyboard in Resources */,
 				0490C0AB24087E560093B0BE /* Assets.xcassets in Resources */,
-				0490C0A624087E510093B0BE /* Main.storyboard in Resources */,
 				0490C0D224087E660093B0BE /* StackOverflowProjectRequirments.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +296,7 @@
 				0490C09F24087E510093B0BE /* AppDelegate.swift in Sources */,
 				0490C0D52408A8730093B0BE /* MainView.swift in Sources */,
 				0490C0A124087E510093B0BE /* SceneDelegate.swift in Sources */,
+				0490C0D72408B4380093B0BE /* URLBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,14 +332,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0490C0A424087E510093B0BE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0490C0A524087E510093B0BE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0490C0AC24087E560093B0BE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -467,7 +461,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StackOverflow/StackOverflow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = YZ49UPFS2X;
 				INFOPLIST_FILE = StackOverflow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -476,6 +472,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mcs.StackOverflow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -485,7 +482,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StackOverflow/StackOverflow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = YZ49UPFS2X;
 				INFOPLIST_FILE = StackOverflow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -494,6 +493,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mcs.StackOverflow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
