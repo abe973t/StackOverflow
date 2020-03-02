@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     
     /**
      TODO:
-        - Build URL Builder - test - commit
         - Build Models - test - commit
         - Build UI on paper - implement - test - commit
      */
@@ -25,11 +24,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         mainView.controller = self
+        mainView.configureSearchBar()
         view = mainView
         
         navigationController?.navigationBar.barTintColor = .black
         
-        print(URLBuilder.searchQuestion(containing: "hello", sortedBy: .activity, displayOrder: .desc, tags: "swift", "iOS", "Xcode"))
+        print(URLBuilder.searchQuestion(containing: "hello", sortedBy: .activity, displayOrder: .desc, tags: "swift", "iOS", "Xcode")!)
     }
-    
 }

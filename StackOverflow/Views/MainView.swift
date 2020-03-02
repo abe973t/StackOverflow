@@ -11,12 +11,8 @@ import UIKit
 // swiftlint:disable trailing_whitespace
 class MainView: UIView {
     
-    let searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.barStyle = .black
-        return searchBar
-    }()
+    weak var controller: UIViewController?
+    var searchController: UISearchController?
     
     let tableView: UITableView = {
         let tblView = UITableView()
@@ -24,8 +20,6 @@ class MainView: UIView {
         tblView.backgroundColor = .gray
         return tblView
     }()
-    
-    weak var controller: UIViewController?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,7 +33,6 @@ class MainView: UIView {
     }
     
     func addViews() {
-        addSubview(searchBar)
         addSubview(tableView)
         
         addContraints()
@@ -47,15 +40,28 @@ class MainView: UIView {
     
     func addContraints() {
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            searchBar.leadingAnchor.constraint(equalTo: leadingAnchor),
-            searchBar.trailingAnchor.constraint(equalTo: trailingAnchor),
-            searchBar.heightAnchor.constraint(equalToConstant: 50),
-            
-            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+}
+
+extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
+    func configureSearchBar() {
+        searchController = UISearchController(searchResultsController: nil)
+        
+        searchController!.searchResultsUpdater = self
+        searchController!.hidesNavigationBarDuringPresentation = false
+        searchController!.searchBar.showsCancelButton = false
+        searchController!.searchBar.delegate = self
+        searchController?.searchBar.placeholder = "Search Question"
+        
+        controller?.navigationItem.titleView = searchController?.searchBar
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        // TODO: do this after making models
     }
 }

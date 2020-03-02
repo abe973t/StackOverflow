@@ -110,9 +110,9 @@
 				0496EAE324094FAB003B2772 /* StackOverflow.entitlements */,
 				0490C09E24087E510093B0BE /* AppDelegate.swift */,
 				0490C0A024087E510093B0BE /* SceneDelegate.swift */,
-				0490C0A224087E510093B0BE /* ViewController.swift */,
-				0490C0D62408B4380093B0BE /* URLBuilder.swift */,
-				0490C0D42408A8730093B0BE /* MainView.swift */,
+				04917C41240D915F00D66EBF /* Controllers */,
+				04917C42240D916F00D66EBF /* Views */,
+				04917C43240D918100D66EBF /* Tools */,
 				0490C0AA24087E560093B0BE /* Assets.xcassets */,
 				0490C0AC24087E560093B0BE /* LaunchScreen.storyboard */,
 				0490C0AF24087E560093B0BE /* Info.plist */,
@@ -137,6 +137,30 @@
 				0490C0C524087E570093B0BE /* Info.plist */,
 			);
 			path = StackOverflowUITests;
+			sourceTree = "<group>";
+		};
+		04917C41240D915F00D66EBF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0490C0A224087E510093B0BE /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		04917C42240D916F00D66EBF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0490C0D42408A8730093B0BE /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		04917C43240D918100D66EBF /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				0490C0D62408B4380093B0BE /* URLBuilder.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
