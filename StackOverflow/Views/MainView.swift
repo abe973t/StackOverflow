@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import SafariServices
 
 // swiftlint:disable trailing_whitespace
 class MainView: UIView {
     
     weak var controller: UIViewController?
     var searchController: UISearchController?
+    var questionsList = [Items]()
     
     let tableView: UITableView = {
         let tblView = UITableView()
@@ -25,6 +27,9 @@ class MainView: UIView {
         super.init(frame: frame)
         
         self.backgroundColor = .white
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
         addViews()
     }
     
@@ -54,14 +59,60 @@ extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearc
         
         searchController!.searchResultsUpdater = self
         searchController!.hidesNavigationBarDuringPresentation = false
-        searchController!.searchBar.showsCancelButton = false
+        searchController!.automaticallyShowsCancelButton = false
+        searchController!.delegate = self
+        searchController!.searchBar.searchBarStyle = .minimal
+        searchController!.searchBar.sizeToFit()
+        searchController!.searchBar.becomeFirstResponder()
+        searchController!.searchBar.showsCancelButton = true
         searchController!.searchBar.delegate = self
-        searchController?.searchBar.placeholder = "Search Question"
         
         controller?.navigationItem.titleView = searchController?.searchBar
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        // TODO: do this after making models
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            if let url = URLBuilder.searchQuestion(
+                containing: text,
+                sortedBy: .activity,
+                displayOrder: .desc) {
+                print(url)
+                NetworkManager.shared.get(url: url) { (data, error) in
+                    // add the shits here
+                    if let data = data {
+                        do {
+                            let response = try JSONDecoder().decode(SOResponse.self, from: data)
+                            self.questionsList = response.items ?? []
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension MainView: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return questionsList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? UITableViewCell
+        
+        cell?.textLabel?.text = self.questionsList[indexPath.row].title!
+        
+        return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let questionLink = questionsList[indexPath.row].link, let questionURL = URL(string: questionLink) {
+            let safariVC = SFSafariViewController(url: questionURL)
+            controller?.navigationController?.pushViewController(safariVC, animated: true)
+        }
     }
 }

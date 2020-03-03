@@ -28,7 +28,5 @@ class ViewController: UIViewController {
         view = mainView
         
         navigationController?.navigationBar.barTintColor = .black
-        
-        print(URLBuilder.searchQuestion(containing: "hello", sortedBy: .activity, displayOrder: .desc, tags: "swift", "iOS", "Xcode")!)
     }
 }
