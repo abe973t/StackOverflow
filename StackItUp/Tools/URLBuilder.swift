@@ -46,7 +46,7 @@ class URLBuilder {
 
         components.scheme = "https"
         components.host = "stackoverflow.com"
-        components.path = "/oauth"
+        components.path = "/oauth/dialog"
         components.queryItems = [
             URLQueryItem(name: "client_id", value: String(clientID)),
             URLQueryItem(name: "scope", value: scope),

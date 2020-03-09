@@ -71,28 +71,32 @@ extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearc
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        if let text = searchController.searchBar.text, !text.isEmpty {
-            if let url = URLBuilder.searchQuestion(
-                containing: text,
-                sortedBy: .activity,
-                displayOrder: .desc) {
-                print(url)
-                NetworkManager.shared.get(url: url) { (data, error) in
-                    // add the shits here
-                    if let data = data {
-                        do {
-                            let response = try JSONDecoder().decode(SOResponse.self, from: data)
-                            self.questionsList = response.items ?? []
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        } catch {
-                            print(error.localizedDescription)
-                        }
-                    }
-                }
-            }
+        if let url = URLBuilder.authURL(clientID: 17333, scope: "write_access", redirectURI: "https://stackexchange.com/oauth/login_success") {
+            controller?.navigationController?.pushViewController(SFSafariViewController(url: url), animated: true)
         }
+        
+//        if let text = searchController.searchBar.text, !text.isEmpty {
+//            if let url = URLBuilder.searchQuestion(
+//                containing: text,
+//                sortedBy: .activity,
+//                displayOrder: .desc) {
+//                print(url)
+//                NetworkManager.shared.get(url: url) { (data, error) in
+//                    // add the shits here
+//                    if let data = data {
+//                        do {
+//                            let response = try JSONDecoder().decode(SOResponse.self, from: data)
+//                            self.questionsList = response.items ?? []
+//                            DispatchQueue.main.async {
+//                                self.tableView.reloadData()
+//                            }
+//                        } catch {
+//                            print(error.localizedDescription)
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 }
 
