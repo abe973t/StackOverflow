@@ -40,7 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0490C09B24087E510093B0BE /* StackOverflow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackOverflow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0490C09B24087E510093B0BE /* StackItUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackItUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0490C09E24087E510093B0BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0490C0A024087E510093B0BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0490C0A224087E510093B0BE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,10 +48,10 @@
 		0490C0AA24087E560093B0BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0490C0AD24087E560093B0BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0490C0AF24087E560093B0BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0490C0B424087E560093B0BE /* StackOverflowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StackOverflowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0490C0B424087E560093B0BE /* StackItUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StackItUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0490C0B824087E560093B0BE /* StackOverflowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackOverflowTests.swift; sourceTree = "<group>"; };
 		0490C0BA24087E570093B0BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0490C0BF24087E570093B0BE /* StackOverflowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StackOverflowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0490C0BF24087E570093B0BE /* StackItUpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StackItUpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0490C0C324087E570093B0BE /* StackOverflowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackOverflowUITests.swift; sourceTree = "<group>"; };
 		0490C0C524087E570093B0BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0490C0D124087E660093B0BE /* StackOverflowProjectRequirments.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = StackOverflowProjectRequirments.pdf; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				0490C0D124087E660093B0BE /* StackOverflowProjectRequirments.pdf */,
-				0490C09D24087E510093B0BE /* StackOverflow */,
+				0490C09D24087E510093B0BE /* StackItUp */,
 				0490C0B724087E560093B0BE /* StackOverflowTests */,
 				0490C0C224087E570093B0BE /* StackOverflowUITests */,
 				0490C09C24087E510093B0BE /* Products */,
@@ -101,14 +101,14 @@
 		0490C09C24087E510093B0BE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0490C09B24087E510093B0BE /* StackOverflow.app */,
-				0490C0B424087E560093B0BE /* StackOverflowTests.xctest */,
-				0490C0BF24087E570093B0BE /* StackOverflowUITests.xctest */,
+				0490C09B24087E510093B0BE /* StackItUp.app */,
+				0490C0B424087E560093B0BE /* StackItUpTests.xctest */,
+				0490C0BF24087E570093B0BE /* StackItUpUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0490C09D24087E510093B0BE /* StackOverflow */ = {
+		0490C09D24087E510093B0BE /* StackItUp */ = {
 			isa = PBXGroup;
 			children = (
 				0496EAE324094FAB003B2772 /* StackOverflow.entitlements */,
@@ -123,7 +123,7 @@
 				0490C0AF24087E560093B0BE /* Info.plist */,
 				0490C0A724087E510093B0BE /* StackOverflow.xcdatamodeld */,
 			);
-			path = StackOverflow;
+			path = StackItUp;
 			sourceTree = "<group>";
 		};
 		0490C0B724087E560093B0BE /* StackOverflowTests */ = {
@@ -180,9 +180,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0490C09A24087E510093B0BE /* StackOverflow */ = {
+		0490C09A24087E510093B0BE /* StackItUp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0490C0C824087E570093B0BE /* Build configuration list for PBXNativeTarget "StackOverflow" */;
+			buildConfigurationList = 0490C0C824087E570093B0BE /* Build configuration list for PBXNativeTarget "StackItUp" */;
 			buildPhases = (
 				0490C09724087E510093B0BE /* Sources */,
 				0490C09824087E510093B0BE /* Frameworks */,
@@ -193,14 +193,14 @@
 			);
 			dependencies = (
 			);
-			name = StackOverflow;
+			name = StackItUp;
 			productName = StackOverflow;
-			productReference = 0490C09B24087E510093B0BE /* StackOverflow.app */;
+			productReference = 0490C09B24087E510093B0BE /* StackItUp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0490C0B324087E560093B0BE /* StackOverflowTests */ = {
+		0490C0B324087E560093B0BE /* StackItUpTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0490C0CB24087E570093B0BE /* Build configuration list for PBXNativeTarget "StackOverflowTests" */;
+			buildConfigurationList = 0490C0CB24087E570093B0BE /* Build configuration list for PBXNativeTarget "StackItUpTests" */;
 			buildPhases = (
 				0490C0B024087E560093B0BE /* Sources */,
 				0490C0B124087E560093B0BE /* Frameworks */,
@@ -211,14 +211,14 @@
 			dependencies = (
 				0490C0B624087E560093B0BE /* PBXTargetDependency */,
 			);
-			name = StackOverflowTests;
+			name = StackItUpTests;
 			productName = StackOverflowTests;
-			productReference = 0490C0B424087E560093B0BE /* StackOverflowTests.xctest */;
+			productReference = 0490C0B424087E560093B0BE /* StackItUpTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0490C0BE24087E570093B0BE /* StackOverflowUITests */ = {
+		0490C0BE24087E570093B0BE /* StackItUpUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0490C0CE24087E570093B0BE /* Build configuration list for PBXNativeTarget "StackOverflowUITests" */;
+			buildConfigurationList = 0490C0CE24087E570093B0BE /* Build configuration list for PBXNativeTarget "StackItUpUITests" */;
 			buildPhases = (
 				0490C0BB24087E570093B0BE /* Sources */,
 				0490C0BC24087E570093B0BE /* Frameworks */,
@@ -229,9 +229,9 @@
 			dependencies = (
 				0490C0C124087E570093B0BE /* PBXTargetDependency */,
 			);
-			name = StackOverflowUITests;
+			name = StackItUpUITests;
 			productName = StackOverflowUITests;
-			productReference = 0490C0BF24087E570093B0BE /* StackOverflowUITests.xctest */;
+			productReference = 0490C0BF24087E570093B0BE /* StackItUpUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -257,7 +257,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0490C09624087E510093B0BE /* Build configuration list for PBXProject "StackOverflow" */;
+			buildConfigurationList = 0490C09624087E510093B0BE /* Build configuration list for PBXProject "StackItUp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -270,9 +270,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0490C09A24087E510093B0BE /* StackOverflow */,
-				0490C0B324087E560093B0BE /* StackOverflowTests */,
-				0490C0BE24087E570093B0BE /* StackOverflowUITests */,
+				0490C09A24087E510093B0BE /* StackItUp */,
+				0490C0B324087E560093B0BE /* StackItUpTests */,
+				0490C0BE24087E570093B0BE /* StackItUpUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -361,12 +361,12 @@
 /* Begin PBXTargetDependency section */
 		0490C0B624087E560093B0BE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0490C09A24087E510093B0BE /* StackOverflow */;
+			target = 0490C09A24087E510093B0BE /* StackItUp */;
 			targetProxy = 0490C0B524087E560093B0BE /* PBXContainerItemProxy */;
 		};
 		0490C0C124087E570093B0BE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0490C09A24087E510093B0BE /* StackOverflow */;
+			target = 0490C09A24087E510093B0BE /* StackItUp */;
 			targetProxy = 0490C0C024087E570093B0BE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -505,7 +505,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = YZ49UPFS2X;
-				INFOPLIST_FILE = StackOverflow/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/StackItUp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -526,7 +526,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = YZ49UPFS2X;
-				INFOPLIST_FILE = StackOverflow/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/StackItUp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -557,7 +557,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StackOverflow.app/StackOverflow";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StackItUp.app/StackItUp";
 			};
 			name = Debug;
 		};
@@ -579,7 +579,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StackOverflow.app/StackOverflow";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StackItUp.app/StackItUp";
 			};
 			name = Release;
 		};
@@ -626,7 +626,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0490C09624087E510093B0BE /* Build configuration list for PBXProject "StackOverflow" */ = {
+		0490C09624087E510093B0BE /* Build configuration list for PBXProject "StackItUp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0490C0C624087E570093B0BE /* Debug */,
@@ -635,7 +635,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0490C0C824087E570093B0BE /* Build configuration list for PBXNativeTarget "StackOverflow" */ = {
+		0490C0C824087E570093B0BE /* Build configuration list for PBXNativeTarget "StackItUp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0490C0C924087E570093B0BE /* Debug */,
@@ -644,7 +644,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0490C0CB24087E570093B0BE /* Build configuration list for PBXNativeTarget "StackOverflowTests" */ = {
+		0490C0CB24087E570093B0BE /* Build configuration list for PBXNativeTarget "StackItUpTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0490C0CC24087E570093B0BE /* Debug */,
@@ -653,7 +653,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0490C0CE24087E570093B0BE /* Build configuration list for PBXNativeTarget "StackOverflowUITests" */ = {
+		0490C0CE24087E570093B0BE /* Build configuration list for PBXNativeTarget "StackItUpUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0490C0CF24087E570093B0BE /* Debug */,

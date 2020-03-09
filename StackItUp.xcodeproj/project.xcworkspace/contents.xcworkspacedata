@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:StackOverflow.xcodeproj">
+      location = "self:/Users/mcs/Documents/StackOverflow/StackItUp.xcodeproj">
    </FileRef>
 </Workspace>

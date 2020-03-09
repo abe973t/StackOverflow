@@ -40,4 +40,19 @@ class URLBuilder {
 
         return components.url
     }
+    
+    static func authURL(clientID: Int, scope: String, redirectURI: String) -> URL? {
+        var components = URLComponents()
+
+        components.scheme = "https"
+        components.host = "stackoverflow.com"
+        components.path = "/oauth"
+        components.queryItems = [
+            URLQueryItem(name: "client_id", value: String(clientID)),
+            URLQueryItem(name: "scope", value: scope),
+            URLQueryItem(name: "redirect_uri", value: redirectURI)
+        ]
+
+        return components.url
+    }
 }
