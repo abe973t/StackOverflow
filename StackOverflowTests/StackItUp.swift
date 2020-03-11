@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import StackOverflow
+@testable import StackItUp
 
 // swiftlint:disable trailing_whitespace
 // swiftlint:disable line_length
@@ -34,6 +34,14 @@ class StackOverflowTests: XCTestCase {
         
         XCTAssertEqual(url.absoluteString, "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=swift;iOS;Xcode&intitle=hello&site=stackoverflow")
         XCTAssertNotEqual(url.absoluteString, "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=swift,iOS,Xcode&intitle=hello&site=stackoverflow")
+    }
+    
+    func testDecoding() throws {
+        let jsonPath = try XCTUnwrap(Bundle.main.path(forResource: "QuestionJSON", ofType: "json"))
+        let jsonPathURL = URL(fileURLWithPath: jsonPath)
+        let jsonData = try Data(contentsOf: jsonPathURL)
+        
+        XCTAssertNoThrow(try JSONDecoder().decode(Question.self, from: jsonData))
     }
 
     func testPerformanceExample() {

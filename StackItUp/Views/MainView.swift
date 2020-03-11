@@ -10,11 +10,13 @@ import UIKit
 import SafariServices
 
 // swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
+// swiftlint:disable identifier_name
 class MainView: UIView {
     
     weak var controller: UIViewController?
     var searchController: UISearchController?
-    var questionsList = [Items]()
+    var questionsList = [Question]()
     
     let tableView: UITableView = {
         let tblView = UITableView()
@@ -30,7 +32,7 @@ class MainView: UIView {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
-        addViews()
+        addViews()        
     }
     
     required init?(coder: NSCoder) {
@@ -71,32 +73,37 @@ extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearc
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        if let url = URLBuilder.authURL(clientID: 17333, scope: "write_access", redirectURI: "https://stackexchange.com/oauth/login_success") {
-            controller?.navigationController?.pushViewController(SFSafariViewController(url: url), animated: true)
-        }
-        
-//        if let text = searchController.searchBar.text, !text.isEmpty {
-//            if let url = URLBuilder.searchQuestion(
-//                containing: text,
-//                sortedBy: .activity,
-//                displayOrder: .desc) {
-//                print(url)
-//                NetworkManager.shared.get(url: url) { (data, error) in
-//                    // add the shits here
-//                    if let data = data {
-//                        do {
-//                            let response = try JSONDecoder().decode(SOResponse.self, from: data)
-//                            self.questionsList = response.items ?? []
-//                            DispatchQueue.main.async {
-//                                self.tableView.reloadData()
-//                            }
-//                        } catch {
-//                            print(error.localizedDescription)
-//                        }
-//                    }
+//        if let url = URLBuilder.accessTokenURL(clientID: 1733, clientSecret: "QZ6HBfR4qutoXsBLvZS2oA((", redirectURI: "https://stackexchange.com/oauth/login_success") {
+//
+//            NetworkManager.shared.post(url: url, data: nil) { (data, err) in
+//                if err == nil {
+//                    print(String(decoding: data!, as: UTF8.self))
 //                }
 //            }
 //        }
+        
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            if let url = URLBuilder.searchQuestion(
+                containing: text,
+                sortedBy: .activity,
+                displayOrder: .desc) {
+                print(url)
+                NetworkManager.shared.get(url: url) { (data, error) in
+                    // add the shits here
+                    if let data = data {
+                        do {
+                            let response = try JSONDecoder().decode(SOResponse.self, from: data)
+                            self.questionsList = response.items ?? []
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -106,7 +113,7 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         
         cell?.textLabel?.text = self.questionsList[indexPath.row].title!
         
@@ -118,5 +125,11 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
             let safariVC = SFSafariViewController(url: questionURL)
             controller?.navigationController?.pushViewController(safariVC, animated: true)
         }
+    }
+}
+
+extension MainView: SFSafariViewControllerDelegate {
+    func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
+        print(URL)
     }
 }

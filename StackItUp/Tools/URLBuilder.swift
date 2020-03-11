@@ -24,7 +24,6 @@ enum Order: String {
 
 class URLBuilder {
     static func searchQuestion(containing query: String, sortedBy sort: Sorting, displayOrder order: Order, tags: String...) -> URL? {
-        let formattedQuery = query.replacingOccurrences(of: " ", with: "%20")
         var components = URLComponents()
 
         components.scheme = "https"
@@ -50,6 +49,22 @@ class URLBuilder {
         components.queryItems = [
             URLQueryItem(name: "client_id", value: String(clientID)),
             URLQueryItem(name: "scope", value: scope),
+            URLQueryItem(name: "redirect_uri", value: redirectURI)
+        ]
+
+        return components.url
+    }
+    
+    static func accessTokenURL(clientID: Int, clientSecret: String, redirectURI: String) -> URL? {
+        var components = URLComponents()
+
+        components.scheme = "https"
+        components.host = "stackoverflow.com"
+        components.path = "/oauth/access_token"
+        components.queryItems = [
+            URLQueryItem(name: "client_id", value: String(clientID)),
+            URLQueryItem(name: "client_secret", value: clientSecret),
+            URLQueryItem(name: "code", value: "WBJWUUBbBV5F3DfWdqnxA"),
             URLQueryItem(name: "redirect_uri", value: redirectURI)
         ]
 

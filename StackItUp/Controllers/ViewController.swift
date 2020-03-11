@@ -9,13 +9,12 @@
 import UIKit
 
 // swiftlint:disable trailing_whitespace
-// swiftlint:disable line_length
 class ViewController: UIViewController {
     
     /**
      TODO:
-        - Build Models - test - commit
         - Build UI on paper - implement - test - commit
+        - Rename project to Debug_?
      */
     
     let mainView = MainView()

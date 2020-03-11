@@ -11,7 +11,6 @@ import UIKit
 // swiftlint:disable trailing_whitespace
 class NetworkManager {
     static let shared = NetworkManager()
-    
     private init() {}
     
     func get(url: URL, completion: @escaping (Data?, Error?) -> ()) {
@@ -24,6 +23,7 @@ class NetworkManager {
             }
             
             if let data = data {
+                print(String(decoding: data, as: UTF8.self))
                 completion(data, nil)
             }
         }
@@ -31,10 +31,13 @@ class NetworkManager {
         task.resume()
     }
     
-    func post(url: URL, data: Data, completion: @escaping (Data?, Error?) -> ()) {
+    func post(url: URL, data: Data?, completion: @escaping (Data?, Error?) -> ()) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.httpBody = data
+        request.httpBody = data ?? nil
+        request.allHTTPHeaderFields = [
+            "Content-Type": "application/x-www-form-urlencoded"
+        ]
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
