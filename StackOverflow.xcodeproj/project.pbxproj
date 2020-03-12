@@ -97,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				0490C0D124087E660093B0BE /* StackOverflowProjectRequirments.pdf */,
-				0490C09D24087E510093B0BE /* StackItUp */,
+				0490C09D24087E510093B0BE /* StackOverflow */,
 				0490C0B724087E560093B0BE /* StackOverflowTests */,
 				0490C0C224087E570093B0BE /* StackOverflowUITests */,
 				0490C09C24087E510093B0BE /* Products */,
@@ -114,7 +114,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0490C09D24087E510093B0BE /* StackItUp */ = {
+		0490C09D24087E510093B0BE /* StackOverflow */ = {
 			isa = PBXGroup;
 			children = (
 				0496EAE324094FAB003B2772 /* StackOverflow.entitlements */,
@@ -129,7 +129,7 @@
 				0490C0AF24087E560093B0BE /* Info.plist */,
 				04EF46F12415E2F800254F70 /* StackItUp.xcdatamodeld */,
 			);
-			path = StackItUp;
+			path = StackOverflow;
 			sourceTree = "<group>";
 		};
 		0490C0B724087E560093B0BE /* StackOverflowTests */ = {
@@ -266,7 +266,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0490C09624087E510093B0BE /* Build configuration list for PBXProject "StackItUp" */;
+			buildConfigurationList = 0490C09624087E510093B0BE /* Build configuration list for PBXProject "StackOverflow" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -517,7 +517,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = YZ49UPFS2X;
-				INFOPLIST_FILE = "$(SRCROOT)/StackItUp/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/StackOverflow/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -538,7 +538,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = YZ49UPFS2X;
-				INFOPLIST_FILE = "$(SRCROOT)/StackItUp/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/StackOverflow/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -638,7 +638,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0490C09624087E510093B0BE /* Build configuration list for PBXProject "StackItUp" */ = {
+		0490C09624087E510093B0BE /* Build configuration list for PBXProject "StackOverflow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0490C0C624087E570093B0BE /* Debug */,

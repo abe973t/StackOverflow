@@ -21,7 +21,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "StackUnderflow"
+        title = "StackOverflow"
         
         mainView.controller = self
         mainView.configureSearchBar()
