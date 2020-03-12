@@ -11,7 +11,6 @@ import SafariServices
 
 // swiftlint:disable trailing_whitespace
 // swiftlint:disable line_length
-// swiftlint:disable identifier_name
 class MainView: UIView {
     
     weak var controller: UIViewController?
@@ -23,6 +22,13 @@ class MainView: UIView {
         tblView.translatesAutoresizingMaskIntoConstraints = false
         tblView.backgroundColor = .gray
         return tblView
+    }()
+    
+    let searchBarView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -40,6 +46,7 @@ class MainView: UIView {
     }
     
     func addViews() {
+        addSubview(searchBarView)
         addSubview(tableView)
         
         addContraints()
@@ -47,7 +54,12 @@ class MainView: UIView {
     
     func addContraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topAnchor),
+            searchBarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            searchBarView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            searchBarView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            searchBarView.heightAnchor.constraint(equalToConstant: 55),
+            
+            tableView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -68,8 +80,11 @@ extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearc
         searchController!.searchBar.becomeFirstResponder()
         searchController!.searchBar.showsCancelButton = true
         searchController!.searchBar.delegate = self
+        searchController!.searchBar.barStyle = .black
+        searchController!.searchBar.showsCancelButton = false
+        searchController!.searchBar.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
-        controller?.navigationItem.titleView = searchController?.searchBar
+        searchBarView.addSubview(searchController!.searchBar)
     }
     
     func updateSearchResults(for searchController: UISearchController) {

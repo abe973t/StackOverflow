@@ -21,11 +21,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "StackUnderflow"
         
         mainView.controller = self
         mainView.configureSearchBar()
         view = mainView
         
         navigationController?.navigationBar.barTintColor = .black
+        navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(postQuestionScreen)), animated: true)
+    }
+    
+    @objc func postQuestionScreen() {
+        navigationController?.pushViewController(CreateQuestionVC(), animated: true)
     }
 }
