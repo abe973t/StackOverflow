@@ -13,25 +13,32 @@ class ViewController: UIViewController {
     
     /**
      TODO:
-        - Build UI on paper - implement - test - commit
-        - Rename project to Debug_?
+        - Create login screen
+        - Store authToken in UserDefaults (if you need a new one everytime) else CoreData
+        - Finish create Question screen
      */
     
+    let loginView = LoginView()
     let mainView = MainView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "StackOverflow"
-        
-        mainView.controller = self
-        mainView.configureSearchBar()
-        view = mainView
-        
+        loginView.controller = self
+        view = loginView
         navigationController?.navigationBar.barTintColor = .black
-        navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(postQuestionScreen)), animated: true)
     }
     
     @objc func postQuestionScreen() {
         navigationController?.pushViewController(CreateQuestionVC(), animated: true)
+    }
+    
+    func loadMainScreen() {
+        print("yo")
+        mainView.controller = self
+        mainView.configureSearchBar()
+        navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(postQuestionScreen)), animated: true)
+        
+        view = mainView
     }
 }

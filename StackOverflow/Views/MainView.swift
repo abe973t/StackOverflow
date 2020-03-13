@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import WebKit
 
 // swiftlint:disable trailing_whitespace
 // swiftlint:disable line_length
@@ -88,15 +89,6 @@ extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearc
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-//        if let url = URLBuilder.accessTokenURL(clientID: 1733, clientSecret: "QZ6HBfR4qutoXsBLvZS2oA((", redirectURI: "https://stackexchange.com/oauth/login_success") {
-//
-//            NetworkManager.shared.post(url: url, data: nil) { (data, err) in
-//                if err == nil {
-//                    print(String(decoding: data!, as: UTF8.self))
-//                }
-//            }
-//        }
-        
         if let text = searchController.searchBar.text, !text.isEmpty {
             if let url = URLBuilder.searchQuestion(
                 containing: text,
@@ -104,7 +96,6 @@ extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearc
                 displayOrder: .desc) {
                 print(url)
                 NetworkManager.shared.get(url: url) { (data, error) in
-                    // add the shits here
                     if let data = data {
                         do {
                             let response = try JSONDecoder().decode(SOResponse.self, from: data)
@@ -143,8 +134,8 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension MainView: SFSafariViewControllerDelegate {
-    func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
-        print(URL)
+extension MainView: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print(webView.url?.absoluteURL)
     }
 }

@@ -40,6 +40,23 @@ class URLBuilder {
         return components.url
     }
     
+    static func createQuestion(with title: String, body: String, tags: String) -> URL? {
+        var components = URLComponents()
+
+        components.scheme = "https"
+        components.host = "api.stackexchange.com"
+        components.path = "/2.2/question/add"
+        components.queryItems = [
+            URLQueryItem(name: "title", value: title),
+            URLQueryItem(name: "body", value: body),
+            URLQueryItem(name: "tags", value: tags.replacingOccurrences(of: " ", with: ";")),
+            URLQueryItem(name: "key", value: "KXri6b9pdb3XETF1TjaH3A(("),
+            URLQueryItem(name: "access_token", value: "YcQa8K0rKMpqSV4UCIJRnQ))")
+        ]
+
+        return components.url
+    }
+    
     static func authURL(clientID: Int, scope: String, redirectURI: String) -> URL? {
         var components = URLComponents()
 

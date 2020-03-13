@@ -9,6 +9,7 @@
 import UIKit
 
 // swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 class CreateQuestionView: UIView {
 
     weak var controller: UIViewController?
@@ -65,8 +66,19 @@ class CreateQuestionView: UIView {
         btn.layer.cornerRadius = 10
         btn.backgroundColor = .systemBlue
         btn.setTitle("Submit Question", for: .normal)
+        btn.addTarget(self, action: #selector(createQuestion), for: .touchUpInside)
         return btn
     }()
+    
+    @objc func createQuestion() {
+        if let url = URLBuilder.createQuestion(with: "Does Swift have a URLBuilder class?", body: "Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger. The methods in the UIConstraintBasedLayoutDebugging category on UIView listed in <UIKitCore/UIView.h> may also be helpful.", tags: "swift ios xcode") {
+            NetworkManager.shared.get(url: url) { (data, error) in
+                if error == nil {
+                    print(String(decoding: data!, as: UTF8.self))
+                }
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

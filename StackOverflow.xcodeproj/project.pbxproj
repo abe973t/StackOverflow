@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04638D12241C179900B09137 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04638D11241C179900B09137 /* String+Extensions.swift */; };
+		04638D15241C22D400B09137 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04638D14241C22D400B09137 /* Array+Extensions.swift */; };
 		0490C09F24087E510093B0BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C09E24087E510093B0BE /* AppDelegate.swift */; };
 		0490C0A124087E510093B0BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0A024087E510093B0BE /* SceneDelegate.swift */; };
 		0490C0A324087E510093B0BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C0A224087E510093B0BE /* ViewController.swift */; };
@@ -23,6 +25,7 @@
 		04D5309C24193C7100E5745A /* CreateQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5309B24193C7100E5745A /* CreateQuestionVC.swift */; };
 		04D5309E24193CBD00E5745A /* CreateQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5309D24193CBD00E5745A /* CreateQuestionView.swift */; };
 		04EF46F32415E2F800254F70 /* StackItUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04EF46F12415E2F800254F70 /* StackItUp.xcdatamodeld */; };
+		04F713EB241BC1160098ACDE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F713EA241BC1160098ACDE /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04638D11241C179900B09137 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		04638D14241C22D400B09137 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		0490C09B24087E510093B0BE /* StackItUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackItUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0490C09E24087E510093B0BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0490C0A024087E510093B0BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +71,7 @@
 		04D5309B24193C7100E5745A /* CreateQuestionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionVC.swift; sourceTree = "<group>"; };
 		04D5309D24193CBD00E5745A /* CreateQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionView.swift; sourceTree = "<group>"; };
 		04EF46F22415E2F800254F70 /* StackOverflow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StackOverflow.xcdatamodel; sourceTree = "<group>"; };
+		04F713EA241BC1160098ACDE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = StackOverflow/Views/LoginView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04638D13241C188600B09137 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				04638D14241C22D400B09137 /* Array+Extensions.swift */,
+				04638D11241C179900B09137 /* String+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0490C09224087E510093B0BE = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +139,7 @@
 				04917C42240D916F00D66EBF /* Views */,
 				04917C46240DA24200D66EBF /* Models */,
 				04917C43240D918100D66EBF /* Tools */,
+				04638D13241C188600B09137 /* Extensions */,
 				0490C0AA24087E560093B0BE /* Assets.xcassets */,
 				0490C0AC24087E560093B0BE /* LaunchScreen.storyboard */,
 				0490C0AF24087E560093B0BE /* Info.plist */,
@@ -162,6 +178,7 @@
 		04917C42240D916F00D66EBF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04F713EA241BC1160098ACDE /* LoginView.swift */,
 				0490C0D42408A8730093B0BE /* MainView.swift */,
 				04D5309D24193CBD00E5745A /* CreateQuestionView.swift */,
 			);
@@ -340,11 +357,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D5309E24193CBD00E5745A /* CreateQuestionView.swift in Sources */,
+				04638D12241C179900B09137 /* String+Extensions.swift in Sources */,
 				0490C0A324087E510093B0BE /* ViewController.swift in Sources */,
 				0490C09F24087E510093B0BE /* AppDelegate.swift in Sources */,
 				0490C0D52408A8730093B0BE /* MainView.swift in Sources */,
+				04638D15241C22D400B09137 /* Array+Extensions.swift in Sources */,
 				04917C48240DA90E00D66EBF /* NetworkManager.swift in Sources */,
 				04D5309C24193C7100E5745A /* CreateQuestionVC.swift in Sources */,
+				04F713EB241BC1160098ACDE /* LoginView.swift in Sources */,
 				04EF46F32415E2F800254F70 /* StackItUp.xcdatamodeld in Sources */,
 				0490C0A124087E510093B0BE /* SceneDelegate.swift in Sources */,
 				04917C45240DA23D00D66EBF /* Question.swift in Sources */,
