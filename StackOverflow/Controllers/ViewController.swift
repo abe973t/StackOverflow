@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     
     /**
      TODO:
-        - Create login screen
         - Store authToken in UserDefaults (if you need a new one everytime) else CoreData
         - Finish create Question screen
      */

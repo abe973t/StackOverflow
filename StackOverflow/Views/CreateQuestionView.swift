@@ -72,11 +72,12 @@ class CreateQuestionView: UIView {
     
     @objc func createQuestion() {
         if let url = URLBuilder.createQuestion(with: "Does Swift have a URLBuilder class?", body: "Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger. The methods in the UIConstraintBasedLayoutDebugging category on UIView listed in <UIKitCore/UIView.h> may also be helpful.", tags: "swift ios xcode") {
-            NetworkManager.shared.get(url: url) { (data, error) in
+            // if I use GET I get useless HTML
+            NetworkManager.shared.post(url: url, data: nil, completion: { (data, error) in
                 if error == nil {
                     print(String(decoding: data!, as: UTF8.self))
                 }
-            }
+            })
         }
     }
     

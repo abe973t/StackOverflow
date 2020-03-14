@@ -51,7 +51,7 @@ class URLBuilder {
             URLQueryItem(name: "body", value: body),
             URLQueryItem(name: "tags", value: tags.replacingOccurrences(of: " ", with: ";")),
             URLQueryItem(name: "key", value: "KXri6b9pdb3XETF1TjaH3A(("),
-            URLQueryItem(name: "access_token", value: "YcQa8K0rKMpqSV4UCIJRnQ))")
+            URLQueryItem(name: "access_token", value: UserDefaults.standard.string(forKey: "access_token"))
         ]
 
         return components.url
