@@ -9,9 +9,9 @@
 import UIKit
 import SafariServices
 import WebKit
+import SwiftSoup
 
 // swiftlint:disable trailing_whitespace
-// swiftlint:disable line_length
 class MainView: UIView {
     
     weak var controller: UIViewController?
@@ -83,7 +83,6 @@ extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearc
         searchController!.searchBar.delegate = self
         searchController!.searchBar.barStyle = .black
         searchController!.searchBar.showsCancelButton = false
-        searchController!.searchBar.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
         searchBarView.addSubview(searchController!.searchBar)
     }
@@ -128,8 +127,35 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let questionLink = questionsList[indexPath.row].link, let questionURL = URL(string: questionLink) {
-            let safariVC = SFSafariViewController(url: questionURL)
-            controller?.navigationController?.pushViewController(safariVC, animated: true)
+//        controller?.navigationController?.pushViewController(QuestionViewController(), animated: true)
+            print(questionURL.absoluteString)
+                        
+            // use this to start the web scraping
+            let task = URLSession.shared.dataTask(with: questionURL) { data, response, error in
+                guard let data = data, error == nil else {
+                    print("\(error)")
+                    return
+                }
+
+                do {
+                    let html = String(data: data, encoding: .utf8)
+                    let doc: Document = try SwiftSoup.parse(html!)
+                    let link: Elements = try doc.getElementsByClass("post-text")
+                    
+                    let text: String = try doc.body()!.text(); // "An example link"
+                    let linkHref: String = try link.attr("href"); // "http://example.com/"
+                    let linkText: String = try link.text(); // "example"
+                    
+                    let linkOuterH: String = try link.outerHtml(); // "<a href="http://example.com"><b>example</b></a>"
+                    let linkInnerH: String = try link.html(); // "<b>example</b>"
+                } catch Exception.Error(let type, let message) {
+                    print(message)
+                } catch {
+                    print("error")
+                }
+            }
+
+            task.resume()
         }
     }
 }

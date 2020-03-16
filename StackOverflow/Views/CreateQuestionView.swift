@@ -71,11 +71,54 @@ class CreateQuestionView: UIView {
     }()
     
     @objc func createQuestion() {
-        if let url = URLBuilder.createQuestion(with: "Does Swift have a URLBuilder class?", body: "Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger. The methods in the UIConstraintBasedLayoutDebugging category on UIView listed in <UIKitCore/UIView.h> may also be helpful.", tags: "swift ios xcode") {
-            // if I use GET I get useless HTML
-            NetworkManager.shared.post(url: url, data: nil, completion: { (data, error) in
+        // Ask about this design pattern
+        guard let titleText = titleTxtField.text, titleText != "" else {
+            let alert = UIAlertController(title: "Error", message: "Need a title", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        guard let bodyText = bodyTxtField.text, bodyText != "" else {
+            let alert = UIAlertController(title: "Error", message: "Need a body", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        guard let tagsText = tagsTextField.text, tagsText != "" else {
+            let alert = UIAlertController(title: "Error", message: "Need at least one tag", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        if let url = URLBuilder.createQuestionURL() {
+            print(url)
+            
+            let key = "key=KXri6b9pdb3XETF1TjaH3A(("
+            let token = "&access_token=" + (UserDefaults.standard.string(forKey: "access_token") ?? "")
+            let site = "&site=stackoverflow.com"
+            let title = "&title=" + titleText.replacingOccurrences(of: " ", with: "%20")
+            let body =  "&body=" + bodyText.replacingOccurrences(of: " ", with: "%20")
+            let tags = "&tags=" + tagsText
+
+            let data = (key + token + site + title + body + tags).data(using: .utf8)
+
+            NetworkManager.shared.post(url: url, data: data, completion: { (data, error) in
+                var message = ""
+                
                 if error == nil {
-                    print(String(decoding: data!, as: UTF8.self))
+                    message = String(decoding: data!, as: UTF8.self)
+                } else {
+                    message = error!.localizedDescription
+                }
+                
+                DispatchQueue.main.async {
+                    let alert = UIAlertController()
+                    alert.message = message
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.controller?.present(alert, animated: true, completion: nil)
                 }
             })
         }

@@ -40,19 +40,12 @@ class URLBuilder {
         return components.url
     }
     
-    static func createQuestion(with title: String, body: String, tags: String) -> URL? {
+    static func createQuestionURL() -> URL? {
         var components = URLComponents()
 
         components.scheme = "https"
         components.host = "api.stackexchange.com"
-        components.path = "/2.2/question/add"
-        components.queryItems = [
-            URLQueryItem(name: "title", value: title),
-            URLQueryItem(name: "body", value: body),
-            URLQueryItem(name: "tags", value: tags.replacingOccurrences(of: " ", with: ";")),
-            URLQueryItem(name: "key", value: "KXri6b9pdb3XETF1TjaH3A(("),
-            URLQueryItem(name: "access_token", value: UserDefaults.standard.string(forKey: "access_token"))
-        ]
+        components.path = "/2.2/questions/add/"
 
         return components.url
     }
@@ -76,7 +69,7 @@ class URLBuilder {
         var components = URLComponents()
 
         components.scheme = "https"
-        components.host = "stackoverflow.com"
+        components.host = "api.stackexchange.com"
         components.path = "/oauth/access_token"
         components.queryItems = [
             URLQueryItem(name: "client_id", value: String(clientID)),

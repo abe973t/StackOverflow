@@ -36,6 +36,12 @@ class StackOverflowTests: XCTestCase {
         XCTAssertNotEqual(url.absoluteString, "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=swift,iOS,Xcode&intitle=hello&site=stackoverflow")
     }
     
+    func testCreateQuestionsURL() throws {
+        let url = try XCTUnwrap(URLBuilder.createQuestionURL)
+        
+        XCTAssertEqual(url()!.absoluteString, "https://api.stackexchange.com/2.2/questions/add/")
+    }
+    
     func testDecoding() throws {
         let jsonPath = try XCTUnwrap(Bundle.main.path(forResource: "QuestionJSON", ofType: "json"))
         let jsonPathURL = URL(fileURLWithPath: jsonPath)

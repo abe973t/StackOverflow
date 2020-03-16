@@ -13,8 +13,11 @@ class ViewController: UIViewController {
     
     /**
      TODO:
-        - Store authToken in UserDefaults (if you need a new one everytime) else CoreData
-        - Finish create Question screen
+        - Store authToken in UserDefaults, encrypt somehow
+        - Finish Question screen
+            - parse question
+            - parse answers
+        - find cool sound to play when app loads and when you post shit
      */
     
     let loginView = LoginView()
@@ -33,7 +36,6 @@ class ViewController: UIViewController {
     }
     
     func loadMainScreen() {
-        print("yo")
         mainView.controller = self
         mainView.configureSearchBar()
         navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(postQuestionScreen)), animated: true)

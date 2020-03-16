@@ -34,10 +34,8 @@ class NetworkManager {
     func post(url: URL, data: Data?, completion: @escaping (Data?, Error?) -> ()) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.httpBody = data ?? nil
-        request.allHTTPHeaderFields = [
-            "Content-Type": "application/x-www-form-urlencoded"
-        ]
+        request.httpBody = data
+        request.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
