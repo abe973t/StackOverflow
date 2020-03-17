@@ -31,10 +31,6 @@ class LoginView: UIView {
             // FIXME: doesn't work with the Google auth
             webView.navigationDelegate = self
             webView.load(URLRequest(url: url))
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
-                print(self.webView.url!.absoluteString)
-            }
         }
     }
     

@@ -93,7 +93,6 @@ extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearc
                 containing: text,
                 sortedBy: .activity,
                 displayOrder: .desc) {
-                print(url)
                 NetworkManager.shared.get(url: url) { (data, error) in
                     if let data = data {
                         do {
@@ -120,20 +119,20 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         
+        // TODO: fix Fatal error - Index out of range
         cell?.textLabel?.text = self.questionsList[indexPath.row].title!
         
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let questionLink = questionsList[indexPath.row].link, let questionURL = URL(string: questionLink) {
-//        controller?.navigationController?.pushViewController(QuestionViewController(), animated: true)
-            print(questionURL.absoluteString)
+        if let questionLink = questionsList[indexPath.row].link, let questionURL = URL(string: questionLink), let questionTitle = questionsList[indexPath.row].title {
+            let qVC = QuestionViewController()
+            qVC.title = questionTitle
                         
-            // use this to start the web scraping
             let task = URLSession.shared.dataTask(with: questionURL) { data, response, error in
                 guard let data = data, error == nil else {
-                    print("\(error)")
+                    print(error!.localizedDescription)
                     return
                 }
 
@@ -141,14 +140,22 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
                     let html = String(data: data, encoding: .utf8)
                     let doc: Document = try SwiftSoup.parse(html!)
                     let link: Elements = try doc.getElementsByClass("post-text")
+
+                    let htmlData = NSString(string: link.first()!.description).data(using: String.Encoding.utf8.rawValue)
+                    let options = [
+                        NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
+                        
+                    ]
                     
-                    let text: String = try doc.body()!.text(); // "An example link"
-                    let linkHref: String = try link.attr("href"); // "http://example.com/"
-                    let linkText: String = try link.text(); // "example"
-                    
-                    let linkOuterH: String = try link.outerHtml(); // "<a href="http://example.com"><b>example</b></a>"
-                    let linkInnerH: String = try link.html(); // "<b>example</b>"
-                } catch Exception.Error(let type, let message) {
+                    let attributedString = try! NSMutableAttributedString(data: htmlData!, options: options, documentAttributes: nil)
+                    attributedString.addAttributes([
+                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19)
+                    ], range: NSMakeRange(0, attributedString.length))
+                    DispatchQueue.main.async {
+                        qVC.questionView.questionLabel.attributedText = attributedString
+                        self.controller?.navigationController?.pushViewController(qVC, animated: true)
+                    }
+                } catch Exception.Error( _, let message) {
                     print(message)
                 } catch {
                     print("error")
@@ -157,11 +164,5 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
 
             task.resume()
         }
-    }
-}
-
-extension MainView: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print(webView.url?.absoluteURL)
     }
 }
