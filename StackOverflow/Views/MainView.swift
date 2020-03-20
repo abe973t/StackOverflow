@@ -139,20 +139,37 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
                 do {
                     let html = String(data: data, encoding: .utf8)
                     let doc: Document = try SwiftSoup.parse(html!)
-                    let link: Elements = try doc.getElementsByClass("post-text")
+                    let questionHTML: Elements = try doc.getElementsByClass("post-text")
+                    let answersHTML: Elements = try doc.getElementsByClass("answercell post-layout--right")
 
-                    let htmlData = NSString(string: link.first()!.description).data(using: String.Encoding.utf8.rawValue)
+                    let questionHTMLData = NSString(string: questionHTML.first()!.description).data(using: String.Encoding.utf8.rawValue)
                     let options = [
-                        NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
-                        
+                        NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
                     ]
-                    
-                    let attributedString = try! NSMutableAttributedString(data: htmlData!, options: options, documentAttributes: nil)
+                    let attributedString = try! NSMutableAttributedString(data: questionHTMLData!, options: options, documentAttributes: nil)
                     attributedString.addAttributes([
                         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19)
                     ], range: NSMakeRange(0, attributedString.length))
+                    
+                    var answers = [NSAttributedString]()
+                    for answer in answersHTML.array() {
+                        let answerString = NSString(string: answer.description).data(using: String.Encoding.utf8.rawValue)
+                        let options = [
+                            NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
+                        ]
+                        let answerAttributedString = try! NSMutableAttributedString(data: answerString!, options: options, documentAttributes: nil)
+                        answers.append(answerAttributedString)
+                    }
+                    
                     DispatchQueue.main.async {
                         qVC.questionView.questionLabel.attributedText = attributedString
+                        qVC.questionView.questionLabel.sizeToFit()
+                        print(qVC.questionView.questionLabel.frame.height)
+                        qVC.questionView.answers = answers
+                        qVC.questionView.answersTableView.reloadData()
+//                        qVC.questionView.scrollView.contentSize = CGSize(width: self.frame.width, height: qVC.questionView.questionLabel.frame.height + qVC.questionView.answersTableView.frame.height)
+                        print(qVC.questionView.scrollView.contentSize.height)
+                        qVC.questionView.scrollView.backgroundColor = .yellow
                         self.controller?.navigationController?.pushViewController(qVC, animated: true)
                     }
                 } catch Exception.Error( _, let message) {

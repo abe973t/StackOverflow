@@ -18,10 +18,20 @@ class QuestionView: UIView {
         - adjust color scheme
      **/
     
+    var answers: [NSAttributedString]?
+    
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.isScrollEnabled = true
         return scrollView
+    }()
+    
+    let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return view
     }()
     
     let questionLabel: UILabel = {
@@ -90,6 +100,9 @@ class QuestionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .gray
+        answersTableView.dataSource = self
+        answersTableView.delegate = self
+        answersTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         addViews()
     }
@@ -99,23 +112,47 @@ class QuestionView: UIView {
     }
     
     func addViews() {
-        addSubview(questionLabel)
-        addSubview(upArrowButton)
-        addSubview(downArrowButton)
-        addSubview(favButton)
-        addSubview(answersCountLabel)
-        addSubview(sortSegmentedControl)
-        addSubview(answersTableView)
-        addSubview(postAnswerTextfield)
-        addSubview(postButton)
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(questionLabel)
+        contentView.addSubview(questionLabel)
+        contentView.addSubview(upArrowButton)
+        contentView.addSubview(downArrowButton)
+        contentView.addSubview(favButton)
+//        scrollView.addSubview(answersCountLabel)
+//        addSubview(sortSegmentedControl)
+        contentView.addSubview(answersTableView)
+//        addSubview(postAnswerTextfield)
+//        addSubview(postButton)
         
         addConstraints()
-        questionLabel.sizeToFit()
+//        questionLabel.sizeToFit()
+//        scrollView.contentSize = CGSize(width: frame.width, height: questionLabel.frame.height + 75)
+//        scrollView.isScrollEnabled = true
+//        scrollView.showsVerticalScrollIndicator = true
     }
     
     func addConstraints() {
+        let viewYAnchorConstraint = contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
+        viewYAnchorConstraint.priority = UILayoutPriority(250)
+        
+        let viewBtmConstraint = contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        viewBtmConstraint.priority = UILayoutPriority(250)
+        
         NSLayoutConstraint.activate([
-            upArrowButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
+            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            viewBtmConstraint,
+            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            viewYAnchorConstraint,
+            
+            upArrowButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 30),
             upArrowButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             upArrowButton.heightAnchor.constraint(equalToConstant: 30),
             upArrowButton.widthAnchor.constraint(equalToConstant: 30),
@@ -133,6 +170,34 @@ class QuestionView: UIView {
             questionLabel.topAnchor.constraint(equalTo: upArrowButton.topAnchor),
             questionLabel.leadingAnchor.constraint(equalTo: upArrowButton.trailingAnchor, constant: 20),
             questionLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
+            answersTableView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor),
+            answersTableView.leadingAnchor.constraint(equalTo: upArrowButton.leadingAnchor),
+            answersTableView.trailingAnchor.constraint(equalTo: questionLabel.trailingAnchor),
+            answersTableView.heightAnchor.constraint(equalToConstant: 200),
+            answersTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -50)
         ])
+    }
+}
+
+extension QuestionView: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        answers?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+            return UITableViewCell()
+        }
+        
+        cell.textLabel?.attributedText = answers?[indexPath.row]
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.sizeToFit()
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 400
     }
 }

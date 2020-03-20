@@ -23,7 +23,7 @@ class NetworkManager {
             }
             
             if let data = data {
-                print(String(decoding: data, as: UTF8.self))
+//                print(String(decoding: data, as: UTF8.self))
                 completion(data, nil)
             }
         }
