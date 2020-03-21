@@ -12,10 +12,10 @@ class QuestionView: UIView {
     
     /*
      TODO:
-        - entire pg in scrollView
         - tblView shouldn't scroll
-        - quesLbl height should be dynamic
         - adjust color scheme
+        - add segmented control
+        - add post answer
      **/
     
     var answers: [NSAttributedString]?
@@ -30,7 +30,6 @@ class QuestionView: UIView {
     let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return view
     }()
     
@@ -67,13 +66,16 @@ class QuestionView: UIView {
     let answersCountLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "X Answers"
+        lbl.font = UIFont.systemFont(ofSize: 12)
         return lbl
     }()
     
     let sortSegmentedControl: UISegmentedControl = {
         let sgControl = UISegmentedControl(items: ["Active", "Oldest", "Votes"])
         sgControl.translatesAutoresizingMaskIntoConstraints = false
+        sgControl.backgroundColor = .black
+        sgControl.tintColor = .white
+        sgControl.selectedSegmentIndex = 0
         return sgControl
     }()
     
@@ -87,12 +89,15 @@ class QuestionView: UIView {
     let postAnswerTextfield: UITextView = {
         let txtView = UITextView()
         txtView.translatesAutoresizingMaskIntoConstraints = false
+        txtView.layer.cornerRadius = 10
         return txtView
     }()
 
     let postButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.layer.cornerRadius = 10
+        btn.backgroundColor = .systemBlue
         btn.setTitle("Post Answer", for: .normal)
         return btn
     }()
@@ -119,17 +124,13 @@ class QuestionView: UIView {
         contentView.addSubview(upArrowButton)
         contentView.addSubview(downArrowButton)
         contentView.addSubview(favButton)
-//        scrollView.addSubview(answersCountLabel)
-//        addSubview(sortSegmentedControl)
+        contentView.addSubview(answersCountLabel)
+        contentView.addSubview(sortSegmentedControl)
         contentView.addSubview(answersTableView)
-//        addSubview(postAnswerTextfield)
-//        addSubview(postButton)
+        contentView.addSubview(postAnswerTextfield)
+        contentView.addSubview(postButton)
         
         addConstraints()
-//        questionLabel.sizeToFit()
-//        scrollView.contentSize = CGSize(width: frame.width, height: questionLabel.frame.height + 75)
-//        scrollView.isScrollEnabled = true
-//        scrollView.showsVerticalScrollIndicator = true
     }
     
     func addConstraints() {
@@ -171,11 +172,30 @@ class QuestionView: UIView {
             questionLabel.leadingAnchor.constraint(equalTo: upArrowButton.trailingAnchor, constant: 20),
             questionLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            answersTableView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor),
+            answersCountLabel.topAnchor.constraint(equalTo: questionLabel.bottomAnchor),
+            answersCountLabel.leadingAnchor.constraint(equalTo: upArrowButton.leadingAnchor),
+            answersCountLabel.widthAnchor.constraint(equalToConstant: 75),
+            answersCountLabel.heightAnchor.constraint(equalToConstant: sortSegmentedControl.frame.height),
+            
+            sortSegmentedControl.topAnchor.constraint(equalTo: answersCountLabel.topAnchor),
+            sortSegmentedControl.leadingAnchor.constraint(equalTo: answersCountLabel.trailingAnchor, constant: 20),
+            sortSegmentedControl.trailingAnchor.constraint(equalTo: questionLabel.trailingAnchor),
+            
+            answersTableView.topAnchor.constraint(equalTo: answersCountLabel.bottomAnchor),
             answersTableView.leadingAnchor.constraint(equalTo: upArrowButton.leadingAnchor),
             answersTableView.trailingAnchor.constraint(equalTo: questionLabel.trailingAnchor),
             answersTableView.heightAnchor.constraint(equalToConstant: 200),
-            answersTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -50)
+//            answersTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -50),
+            
+            postAnswerTextfield.topAnchor.constraint(equalTo: answersTableView.bottomAnchor, constant: 10),
+            postAnswerTextfield.leadingAnchor.constraint(equalTo: upArrowButton.leadingAnchor),
+            postAnswerTextfield.trailingAnchor.constraint(equalTo: questionLabel.trailingAnchor),
+            postAnswerTextfield.heightAnchor.constraint(equalToConstant: 100),
+            
+            postButton.topAnchor.constraint(equalTo: postAnswerTextfield.bottomAnchor, constant: 20),
+            postButton.leadingAnchor.constraint(equalTo: upArrowButton.leadingAnchor),
+            postButton.widthAnchor.constraint(equalToConstant: 125),
+            postButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -50),
         ])
     }
 }
@@ -198,6 +218,6 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
+        return UITableView.automaticDimension
     }
 }

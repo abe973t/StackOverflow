@@ -141,7 +141,6 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
                     let doc: Document = try SwiftSoup.parse(html!)
                     let questionHTML: Elements = try doc.getElementsByClass("post-text")
                     let answersHTML: Elements = try doc.getElementsByClass("answercell post-layout--right")
-
                     let questionHTMLData = NSString(string: questionHTML.first()!.description).data(using: String.Encoding.utf8.rawValue)
                     let options = [
                         NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
@@ -158,18 +157,22 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
                             NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
                         ]
                         let answerAttributedString = try! NSMutableAttributedString(data: answerString!, options: options, documentAttributes: nil)
+                        
                         answers.append(answerAttributedString)
                     }
                     
                     DispatchQueue.main.async {
                         qVC.questionView.questionLabel.attributedText = attributedString
                         qVC.questionView.questionLabel.sizeToFit()
-                        print(qVC.questionView.questionLabel.frame.height)
-                        qVC.questionView.answers = answers
-                        qVC.questionView.answersTableView.reloadData()
-//                        qVC.questionView.scrollView.contentSize = CGSize(width: self.frame.width, height: qVC.questionView.questionLabel.frame.height + qVC.questionView.answersTableView.frame.height)
-                        print(qVC.questionView.scrollView.contentSize.height)
-                        qVC.questionView.scrollView.backgroundColor = .yellow
+                        qVC.questionView.answersCountLabel.text = "\(answers.count) Answers"
+                        
+                        if answers.count == 0 {
+                            qVC.questionView.answersTableView.isHidden = true
+                        } else {
+                            qVC.questionView.answers = answers
+                            qVC.questionView.answersTableView.reloadData()
+                        }
+                        
                         self.controller?.navigationController?.pushViewController(qVC, animated: true)
                     }
                 } catch Exception.Error( _, let message) {
