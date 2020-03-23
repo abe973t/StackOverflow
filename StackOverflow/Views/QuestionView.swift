@@ -12,13 +12,12 @@ class QuestionView: UIView {
     
     /*
      TODO:
-        - tblView shouldn't scroll
         - adjust color scheme
-        - add segmented control
         - add post answer
      **/
     
     var answers: [NSAttributedString]?
+    var tableViewHeightConstraint: NSLayoutConstraint?
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -66,7 +65,7 @@ class QuestionView: UIView {
     let answersCountLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont.systemFont(ofSize: 12)
+        lbl.font = UIFont.systemFont(ofSize: 15)
         return lbl
     }()
     
@@ -82,6 +81,7 @@ class QuestionView: UIView {
     let answersTableView: UITableView = {
         let tblView = UITableView()
         tblView.translatesAutoresizingMaskIntoConstraints = false
+        tblView.layer.cornerRadius = 10
         tblView.backgroundColor = .gray
         return tblView
     }()
@@ -140,6 +140,8 @@ class QuestionView: UIView {
         let viewBtmConstraint = contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         viewBtmConstraint.priority = UILayoutPriority(250)
         
+        tableViewHeightConstraint = answersTableView.heightAnchor.constraint(equalToConstant: 200)
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -181,11 +183,10 @@ class QuestionView: UIView {
             sortSegmentedControl.leadingAnchor.constraint(equalTo: answersCountLabel.trailingAnchor, constant: 20),
             sortSegmentedControl.trailingAnchor.constraint(equalTo: questionLabel.trailingAnchor),
             
-            answersTableView.topAnchor.constraint(equalTo: answersCountLabel.bottomAnchor),
+            answersTableView.topAnchor.constraint(equalTo: answersCountLabel.bottomAnchor, constant: 20),
             answersTableView.leadingAnchor.constraint(equalTo: upArrowButton.leadingAnchor),
             answersTableView.trailingAnchor.constraint(equalTo: questionLabel.trailingAnchor),
-            answersTableView.heightAnchor.constraint(equalToConstant: 200),
-//            answersTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -50),
+            tableViewHeightConstraint!,
             
             postAnswerTextfield.topAnchor.constraint(equalTo: answersTableView.bottomAnchor, constant: 10),
             postAnswerTextfield.leadingAnchor.constraint(equalTo: upArrowButton.leadingAnchor),

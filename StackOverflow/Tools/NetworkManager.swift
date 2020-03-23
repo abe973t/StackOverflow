@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: find a way to unit test this bit
 // swiftlint:disable trailing_whitespace
 class NetworkManager {
     static let shared = NetworkManager()

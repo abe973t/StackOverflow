@@ -14,6 +14,8 @@ import XCTest
 class StackOverflowTests: XCTestCase {
     
     let viewController = ViewController()
+    let questionViewController = QuestionViewController()
+    let createQuestionViewController = CreateQuestionVC()
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -24,9 +26,14 @@ class StackOverflowTests: XCTestCase {
     }
 
     func testViewControllerMVVM() {
-        XCTAssertNotNil(viewController.mainView)
+        XCTAssertNotNil(viewController.loginView)
         viewController.viewDidLoad()
-        XCTAssertNotNil(viewController.mainView.controller)
+        XCTAssertNotNil(viewController.loginView.controller)
+    }
+    
+    func testQuestionVCMVVM() {
+        XCTAssertNotNil(questionViewController.questionView)
+        viewController.viewDidLoad()
     }
     
     func testSearchQuestionsURL() throws {

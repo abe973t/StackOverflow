@@ -15,10 +15,19 @@ class QuestionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        questionView.controller = self
         view = questionView
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        DispatchQueue.main.async {
+//            self.questionView.answersTableView.reloadData()
+//        }
+//    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
+        questionView.tableViewHeightConstraint!.constant = self.questionView.answersTableView.contentSize.height
+        print(self.questionView.answersTableView.contentSize.height)
+    }
 }
