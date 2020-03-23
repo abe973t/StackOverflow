@@ -13,7 +13,7 @@ import WebKit
 // swiftlint:disable line_length
 class LoginView: UIView {
         
-    weak var controller: ViewController?
+    weak var controller: MainViewController?
     
     let webView: WKWebView = {
         let webView = WKWebView()
@@ -59,6 +59,7 @@ extension LoginView: WKNavigationDelegate {
         if let url = webView.url, url.absoluteString.contains("access_token") {
             // store token
             let token = url.absoluteString.substring(with: 59..<83)
+            print(token)
             let defaults = UserDefaults.standard
             
             defaults.set(token, forKey: "access_token")

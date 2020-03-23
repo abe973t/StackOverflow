@@ -13,11 +13,14 @@ class QuestionView: UIView {
     /*
      TODO:
         - adjust color scheme
-        - add post answer
+        - refresh pg after post answer
+        - change alert when post successful
      **/
     
+    weak var controller: UIViewController?
     var answers: [NSAttributedString]?
-    var tableViewHeightConstraint: NSLayoutConstraint?
+    var tableViewHeightConstraint: NSLayoutConstraint!
+    var questionID: Int!
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -81,7 +84,7 @@ class QuestionView: UIView {
     let answersTableView: UITableView = {
         let tblView = UITableView()
         tblView.translatesAutoresizingMaskIntoConstraints = false
-        tblView.layer.cornerRadius = 10
+        tblView.layer.cornerRadius = 5
         tblView.backgroundColor = .gray
         return tblView
     }()
@@ -89,16 +92,17 @@ class QuestionView: UIView {
     let postAnswerTextfield: UITextView = {
         let txtView = UITextView()
         txtView.translatesAutoresizingMaskIntoConstraints = false
-        txtView.layer.cornerRadius = 10
+        txtView.layer.cornerRadius = 5
         return txtView
     }()
 
     let postButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.layer.cornerRadius = 10
+        btn.layer.cornerRadius = 5
         btn.backgroundColor = .systemBlue
         btn.setTitle("Post Answer", for: .normal)
+        btn.addTarget(self, action: #selector(postAnswer), for: .touchUpInside)
         return btn
     }()
     
@@ -114,6 +118,48 @@ class QuestionView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func postAnswer() {
+        // Ask about this design pattern
+        guard let answerText = postAnswerTextfield.text, answerText != "" else {
+            let alert = UIAlertController(title: "Error", message: "Answer cannot be blank", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        guard let token = UserDefaults.standard.string(forKey: "access_token") else {
+            let alert = UIAlertController(title: "Error", message: "Must have token stored somewhere", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        if let url = URLBuilder.createAnswerURL(questionID: questionID) {
+            let key = "key=KXri6b9pdb3XETF1TjaH3A(("
+            let tokenComponent = "&access_token=" + token
+            let site = "&site=stackoverflow.com"
+            let body =  "&body=" + answerText.replacingOccurrences(of: " ", with: "%20")
+
+            let data = (key + tokenComponent + site + body).data(using: .utf8)
+
+            NetworkManager.shared.post(url: url, data: data, completion: { (data, error) in
+                var message = ""
+
+                if error == nil {
+                    message = String(decoding: data!, as: UTF8.self)
+                } else {
+                    message = error!.localizedDescription
+                }
+
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Response", message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.controller?.present(alert, animated: true, completion: nil)
+                }
+            })
+        }
     }
     
     func addViews() {
@@ -186,7 +232,7 @@ class QuestionView: UIView {
             answersTableView.topAnchor.constraint(equalTo: answersCountLabel.bottomAnchor, constant: 20),
             answersTableView.leadingAnchor.constraint(equalTo: upArrowButton.leadingAnchor),
             answersTableView.trailingAnchor.constraint(equalTo: questionLabel.trailingAnchor),
-            tableViewHeightConstraint!,
+            tableViewHeightConstraint,
             
             postAnswerTextfield.topAnchor.constraint(equalTo: answersTableView.bottomAnchor, constant: 10),
             postAnswerTextfield.leadingAnchor.constraint(equalTo: upArrowButton.leadingAnchor),

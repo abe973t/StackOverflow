@@ -126,9 +126,10 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let questionLink = questionsList[indexPath.row].link, let questionURL = URL(string: questionLink), let questionTitle = questionsList[indexPath.row].title {
+        if let questionLink = questionsList[indexPath.row].link, let questionURL = URL(string: questionLink), let questionTitle = questionsList[indexPath.row].title, let questionID = questionsList[indexPath.row].question_id {
             let qVC = QuestionViewController()
             qVC.title = questionTitle
+            qVC.questionView.questionID = questionID
                         
             let task = URLSession.shared.dataTask(with: questionURL) { data, response, error in
                 guard let data = data, error == nil else {

@@ -13,7 +13,7 @@ import XCTest
 // swiftlint:disable line_length
 class StackOverflowTests: XCTestCase {
     
-    let viewController = ViewController()
+    let viewController = MainViewController()
     let questionViewController = QuestionViewController()
     let createQuestionViewController = CreateQuestionVC()
 

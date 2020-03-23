@@ -50,6 +50,16 @@ class URLBuilder {
         return components.url
     }
     
+    static func createAnswerURL(questionID: Int) -> URL? {
+        var components = URLComponents()
+
+        components.scheme = "https"
+        components.host = "api.stackexchange.com"
+        components.path = "/2.2/questions/\(questionID)/answers/add/"
+
+        return components.url
+    }
+    
     static func authURL(clientID: Int, scope: String, redirectURI: String) -> URL? {
         var components = URLComponents()
 
@@ -59,22 +69,6 @@ class URLBuilder {
         components.queryItems = [
             URLQueryItem(name: "client_id", value: String(clientID)),
             URLQueryItem(name: "scope", value: scope),
-            URLQueryItem(name: "redirect_uri", value: redirectURI)
-        ]
-
-        return components.url
-    }
-    
-    static func accessTokenURL(clientID: Int, clientSecret: String, redirectURI: String) -> URL? {
-        var components = URLComponents()
-
-        components.scheme = "https"
-        components.host = "api.stackexchange.com"
-        components.path = "/oauth/access_token"
-        components.queryItems = [
-            URLQueryItem(name: "client_id", value: String(clientID)),
-            URLQueryItem(name: "client_secret", value: clientSecret),
-            URLQueryItem(name: "code", value: "WBJWUUBbBV5F3DfWdqnxA"),
             URLQueryItem(name: "redirect_uri", value: redirectURI)
         ]
 

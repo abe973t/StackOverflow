@@ -9,7 +9,7 @@
 import UIKit
 
 // swiftlint:disable trailing_whitespace
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     /**
      TODO:

@@ -115,8 +115,7 @@ class CreateQuestionView: UIView {
                 }
                 
                 DispatchQueue.main.async {
-                    let alert = UIAlertController()
-                    alert.message = message
+                    let alert = UIAlertController(title: "Response", message: message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                     self.controller?.present(alert, animated: true, completion: nil)
                 }
