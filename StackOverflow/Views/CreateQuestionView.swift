@@ -70,59 +70,6 @@ class CreateQuestionView: UIView {
         return btn
     }()
     
-    @objc func createQuestion() {
-        // Ask about this design pattern
-        guard let titleText = titleTxtField.text, titleText != "" else {
-            let alert = UIAlertController(title: "Error", message: "Need a title", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            controller?.present(alert, animated: true, completion: nil)
-            return
-        }
-        
-        guard let bodyText = bodyTxtField.text, bodyText != "" else {
-            let alert = UIAlertController(title: "Error", message: "Need a body", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            controller?.present(alert, animated: true, completion: nil)
-            return
-        }
-        
-        guard let tagsText = tagsTextField.text, tagsText != "" else {
-            let alert = UIAlertController(title: "Error", message: "Need at least one tag", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            controller?.present(alert, animated: true, completion: nil)
-            return
-        }
-        
-        if let url = URLBuilder.createQuestionURL() {
-            print(url)
-            
-            let key = "key=KXri6b9pdb3XETF1TjaH3A(("
-            let token = "&access_token=" + (UserDefaults.standard.string(forKey: "access_token") ?? "")
-            let site = "&site=stackoverflow.com"
-            let title = "&title=" + titleText.replacingOccurrences(of: " ", with: "%20")
-            let body =  "&body=" + bodyText.replacingOccurrences(of: " ", with: "%20")
-            let tags = "&tags=" + tagsText
-
-            let data = (key + token + site + title + body + tags).data(using: .utf8)
-
-            NetworkManager.shared.post(url: url, data: data, completion: { (data, error) in
-                var message = ""
-                
-                if error == nil {
-                    message = String(decoding: data!, as: UTF8.self)
-                } else {
-                    message = error!.localizedDescription
-                }
-                
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Response", message: message, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                    self.controller?.present(alert, animated: true, completion: nil)
-                }
-            })
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -177,5 +124,58 @@ class CreateQuestionView: UIView {
             submitButton.widthAnchor.constraint(equalToConstant: 300),
             submitButton.heightAnchor.constraint(equalToConstant: 60)
         ])
+    }
+}
+
+@objc extension CreateQuestionView {
+    func createQuestion() {
+        guard let titleText = titleTxtField.text, titleText != "" else {
+            let alert = UIAlertController(title: "Error", message: "Need a title", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        guard let bodyText = bodyTxtField.text, bodyText != "" else {
+            let alert = UIAlertController(title: "Error", message: "Need a body", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        guard let tagsText = tagsTextField.text, tagsText != "" else {
+            let alert = UIAlertController(title: "Error", message: "Need at least one tag", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        if let url = URLBuilder.createQuestionURL() {
+            let key = "key=KXri6b9pdb3XETF1TjaH3A(("
+            let token = "&access_token=" + (UserDefaults.standard.string(forKey: "access_token") ?? "")
+            let site = "&site=stackoverflow.com"
+            let title = "&title=" + titleText.replacingOccurrences(of: " ", with: "%20")
+            let body =  "&body=" + bodyText.replacingOccurrences(of: " ", with: "%20")
+            let tags = "&tags=" + tagsText
+            let data = (key + token + site + title + body + tags).data(using: .utf8)
+
+            NetworkManager.shared.post(url: url, data: data, completion: { (data, error) in
+                var alertMessage = ""
+                let message = String(decoding: data!, as: UTF8.self)
+                let messageJSON = message.convertToDictionary()
+                
+                if let errorMessage = messageJSON!["error_message"] as? String {
+                    alertMessage = errorMessage
+                } else {
+                    alertMessage = "Successfully upvoted question!"
+                }
+                
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Response", message: alertMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.controller?.present(alert, animated: true, completion: nil)
+                }
+            })
+        }
     }
 }

@@ -23,6 +23,21 @@ enum Order: String {
 }
 
 class URLBuilder {
+    static func authURL(clientID: Int, scope: String, redirectURI: String) -> URL? {
+        var components = URLComponents()
+
+        components.scheme = "https"
+        components.host = "stackoverflow.com"
+        components.path = "/oauth/dialog"
+        components.queryItems = [
+            URLQueryItem(name: "client_id", value: String(clientID)),
+            URLQueryItem(name: "scope", value: scope),
+            URLQueryItem(name: "redirect_uri", value: redirectURI)
+        ]
+
+        return components.url
+    }
+    
     static func searchQuestion(containing query: String, sortedBy sort: Sorting, displayOrder order: Order, tags: String...) -> URL? {
         var components = URLComponents()
 
@@ -60,17 +75,22 @@ class URLBuilder {
         return components.url
     }
     
-    static func authURL(clientID: Int, scope: String, redirectURI: String) -> URL? {
+    static func upvoteAnswerURL(questionID: Int) -> URL? {
         var components = URLComponents()
 
         components.scheme = "https"
-        components.host = "stackoverflow.com"
-        components.path = "/oauth/dialog"
-        components.queryItems = [
-            URLQueryItem(name: "client_id", value: String(clientID)),
-            URLQueryItem(name: "scope", value: scope),
-            URLQueryItem(name: "redirect_uri", value: redirectURI)
-        ]
+        components.host = "api.stackexchange.com"
+        components.path = "/2.2/questions/\(questionID)/upvote/"
+
+        return components.url
+    }
+    
+    static func downvoteAnswerURL(questionID: Int) -> URL? {
+        var components = URLComponents()
+
+        components.scheme = "https"
+        components.host = "api.stackexchange.com"
+        components.path = "/2.2/questions/\(questionID)/downvote/"
 
         return components.url
     }

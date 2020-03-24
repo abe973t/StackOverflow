@@ -13,8 +13,6 @@ class QuestionView: UIView {
     /*
      TODO:
         - adjust color scheme
-        - refresh pg after post answer
-        - change alert when post successful
      **/
     
     weak var controller: UIViewController?
@@ -48,6 +46,7 @@ class QuestionView: UIView {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(#imageLiteral(resourceName: "up-arrow"), for: .normal)
+        btn.addTarget(self, action: #selector(upVoteQuestion), for: .touchUpInside)
         return btn
     }()
     
@@ -55,6 +54,7 @@ class QuestionView: UIView {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(#imageLiteral(resourceName: "down-arrow"), for: .normal)
+        btn.addTarget(self, action: #selector(downVoteQuestion), for: .touchUpInside)
         return btn
     }()
     
@@ -118,48 +118,6 @@ class QuestionView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc func postAnswer() {
-        // Ask about this design pattern
-        guard let answerText = postAnswerTextfield.text, answerText != "" else {
-            let alert = UIAlertController(title: "Error", message: "Answer cannot be blank", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            controller?.present(alert, animated: true, completion: nil)
-            return
-        }
-        
-        guard let token = UserDefaults.standard.string(forKey: "access_token") else {
-            let alert = UIAlertController(title: "Error", message: "Must have token stored somewhere", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-            controller?.present(alert, animated: true, completion: nil)
-            return
-        }
-
-        if let url = URLBuilder.createAnswerURL(questionID: questionID) {
-            let key = "key=KXri6b9pdb3XETF1TjaH3A(("
-            let tokenComponent = "&access_token=" + token
-            let site = "&site=stackoverflow.com"
-            let body =  "&body=" + answerText.replacingOccurrences(of: " ", with: "%20")
-
-            let data = (key + tokenComponent + site + body).data(using: .utf8)
-
-            NetworkManager.shared.post(url: url, data: data, completion: { (data, error) in
-                var message = ""
-
-                if error == nil {
-                    message = String(decoding: data!, as: UTF8.self)
-                } else {
-                    message = error!.localizedDescription
-                }
-
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Response", message: message, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                    self.controller?.present(alert, animated: true, completion: nil)
-                }
-            })
-        }
     }
     
     func addViews() {
@@ -266,5 +224,121 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+}
+
+@objc extension QuestionView {
+    func postAnswer() {
+        // Ask about this design pattern
+        guard let answerText = postAnswerTextfield.text, answerText != "" else {
+            let alert = UIAlertController(title: "Error", message: "Answer cannot be blank", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        guard let token = UserDefaults.standard.string(forKey: "access_token") else {
+            let alert = UIAlertController(title: "Error", message: "Must have token stored somewhere", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        if let url = URLBuilder.createAnswerURL(questionID: questionID) {
+            let key = "key=KXri6b9pdb3XETF1TjaH3A(("
+            let tokenComponent = "&access_token=" + token
+            let site = "&site=stackoverflow.com"
+            let body =  "&body=" + answerText.replacingOccurrences(of: " ", with: "%20")
+
+            let data = (key + tokenComponent + site + body).data(using: .utf8)
+
+            NetworkManager.shared.post(url: url, data: data, completion: { (data, error) in
+                var alertMessage = ""
+                let message = String(decoding: data!, as: UTF8.self)
+                let messageJSON = message.convertToDictionary()
+                
+                if let errorMessage = messageJSON!["error_message"] as? String {
+                    alertMessage = errorMessage
+                } else {
+                    alertMessage = "Successfully posted the answer!"
+                }
+
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Response", message: alertMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.controller?.present(alert, animated: true, completion: nil)
+                }
+            })
+        }
+    }
+    
+    func upVoteQuestion() {
+        guard let token = UserDefaults.standard.string(forKey: "access_token") else {
+            let alert = UIAlertController(title: "Error", message: "Must have token stored somewhere", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        if let url = URLBuilder.upvoteAnswerURL(questionID: questionID) {
+            let key = "key=KXri6b9pdb3XETF1TjaH3A(("
+            let tokenComponent = "&access_token=" + token
+            let site = "&site=stackoverflow.com"
+
+            let data = (key + tokenComponent + site).data(using: .utf8)
+
+            NetworkManager.shared.post(url: url, data: data, completion: { (data, error) in
+                var alertMessage = ""
+                let message = String(decoding: data!, as: UTF8.self)
+                let messageJSON = message.convertToDictionary()
+                
+                if let errorMessage = messageJSON!["error_message"] as? String {
+                    alertMessage = errorMessage
+                } else {
+                    alertMessage = "Successfully upvoted question!"
+                }
+
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Response", message: alertMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.controller?.present(alert, animated: true, completion: nil)
+                }
+            })
+        }
+    }
+    
+    func downVoteQuestion() {
+        guard let token = UserDefaults.standard.string(forKey: "access_token") else {
+            let alert = UIAlertController(title: "Error", message: "Must have token stored somewhere", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+
+        if let url = URLBuilder.downvoteAnswerURL(questionID: questionID) {
+            let key = "key=KXri6b9pdb3XETF1TjaH3A(("
+            let tokenComponent = "&access_token=" + token
+            let site = "&site=stackoverflow.com"
+
+            let data = (key + tokenComponent + site).data(using: .utf8)
+
+            NetworkManager.shared.post(url: url, data: data, completion: { (data, error) in
+                var alertMessage = ""
+                let message = String(decoding: data!, as: UTF8.self)
+                let messageJSON = message.convertToDictionary()
+                
+                if let errorMessage = messageJSON!["error_message"] as? String {
+                    alertMessage = errorMessage
+                } else {
+                    alertMessage = "Successfully upvoted question!"
+                }
+
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Response", message: alertMessage, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    self.controller?.present(alert, animated: true, completion: nil)
+                }
+            })
+        }
     }
 }
