@@ -10,11 +10,6 @@ import UIKit
 
 class QuestionView: UIView {
     
-    /*
-     TODO:
-        - adjust color scheme
-     **/
-    
     weak var controller: UIViewController?
     var answers: [NSAttributedString]?
     var tableViewHeightConstraint: NSLayoutConstraint!

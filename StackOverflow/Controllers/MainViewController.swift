@@ -12,23 +12,28 @@ import UIKit
 class MainViewController: UIViewController {
     
     /**
-     TODO:
-        - Store authToken in UserDefaults, encrypt somehow
-        - Finish Question screen
-            - parse question
-            - parse answers
-        - find cool sound to play when app loads and when you post shit
+        TODO:
+            - login flow, encrypt pw
+            - show check for best answer
      */
     
     let loginView = LoginView()
     let mainView = MainView()
+    
+    let logo: UIImageView = {
+        let imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.contentMode = .scaleAspectFit
+        imgView.image = #imageLiteral(resourceName: "stackoverflow")
+        return imgView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "StackOverflow"
-        loginView.controller = self
         view = loginView
-        navigationController?.navigationBar.barTintColor = .black
+        navigationItem.titleView = logo
+        
+        loginView.controller = self
     }
     
     @objc func postQuestionScreen() {

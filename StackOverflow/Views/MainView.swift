@@ -21,14 +21,12 @@ class MainView: UIView {
     let tableView: UITableView = {
         let tblView = UITableView()
         tblView.translatesAutoresizingMaskIntoConstraints = false
-        tblView.backgroundColor = .gray
         return tblView
     }()
     
     let searchBarView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .black
         return view
     }()
     
@@ -78,11 +76,11 @@ extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearc
         searchController!.delegate = self
         searchController!.searchBar.searchBarStyle = .minimal
         searchController!.searchBar.sizeToFit()
-        searchController!.searchBar.becomeFirstResponder()
         searchController!.searchBar.showsCancelButton = true
         searchController!.searchBar.delegate = self
-        searchController!.searchBar.barStyle = .black
+        searchController!.searchBar.barStyle = .default
         searchController!.searchBar.showsCancelButton = false
+        searchController?.searchBar.placeholder = "Enter stressor..."
         
         searchBarView.addSubview(searchController!.searchBar)
     }
@@ -117,12 +115,16 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+            return UITableViewCell()
+        }
         
         // TODO: fix Fatal error - Index out of range
-        cell?.textLabel?.text = self.questionsList[indexPath.row].title!
+        // can add tags and make this a custom cell
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.text = self.questionsList[indexPath.row].title!
         
-        return cell ?? UITableViewCell()
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -185,5 +187,9 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
 
             task.resume()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

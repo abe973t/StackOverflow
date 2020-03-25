@@ -29,8 +29,6 @@
 		04EF46F32415E2F800254F70 /* StackItUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04EF46F12415E2F800254F70 /* StackItUp.xcdatamodeld */; };
 		04F713EB241BC1160098ACDE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F713EA241BC1160098ACDE /* LoginView.swift */; };
 		298028896CD43A6E978753E5 /* Pods_StackItUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A094111E00E7D8E8C353F2 /* Pods_StackItUp.framework */; };
-		96EA9AE5078605193D631085 /* Pods_StackItUpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB78CDC2AEDF11F0A51564C3 /* Pods_StackItUpTests.framework */; };
-		D92E55B417FDC73194D50432 /* Pods_StackItUp_StackItUpUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4454AC48CFFC13FC0A3969CB /* Pods_StackItUp_StackItUpUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,13 +78,7 @@
 		04EF46F22415E2F800254F70 /* StackOverflow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StackOverflow.xcdatamodel; sourceTree = "<group>"; };
 		04F713EA241BC1160098ACDE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = StackOverflow/Views/LoginView.swift; sourceTree = SOURCE_ROOT; };
 		07F1CFF7ED681D51C48F2067 /* Pods-StackItUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackItUp.debug.xcconfig"; path = "Target Support Files/Pods-StackItUp/Pods-StackItUp.debug.xcconfig"; sourceTree = "<group>"; };
-		4454AC48CFFC13FC0A3969CB /* Pods_StackItUp_StackItUpUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StackItUp_StackItUpUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		93EB6DBA7863DD4469CF1A69 /* Pods-StackItUp-StackItUpUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackItUp-StackItUpUITests.debug.xcconfig"; path = "Target Support Files/Pods-StackItUp-StackItUpUITests/Pods-StackItUp-StackItUpUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		947BA78F17576D61F70B7E22 /* Pods-StackItUp-StackItUpUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackItUp-StackItUpUITests.release.xcconfig"; path = "Target Support Files/Pods-StackItUp-StackItUpUITests/Pods-StackItUp-StackItUpUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A5A094111E00E7D8E8C353F2 /* Pods_StackItUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StackItUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB78CDC2AEDF11F0A51564C3 /* Pods_StackItUpTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StackItUpTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA7F91569570AB10156AB916 /* Pods-StackItUpTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackItUpTests.debug.xcconfig"; path = "Target Support Files/Pods-StackItUpTests/Pods-StackItUpTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E2A459BD8F63A604F048141C /* Pods-StackItUpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackItUpTests.release.xcconfig"; path = "Target Support Files/Pods-StackItUpTests/Pods-StackItUpTests.release.xcconfig"; sourceTree = "<group>"; };
 		F9C622D70622D166B379928B /* Pods-StackItUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackItUp.release.xcconfig"; path = "Target Support Files/Pods-StackItUp/Pods-StackItUp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,7 +95,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96EA9AE5078605193D631085 /* Pods_StackItUpTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +102,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D92E55B417FDC73194D50432 /* Pods_StackItUp_StackItUpUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,10 +221,6 @@
 			children = (
 				07F1CFF7ED681D51C48F2067 /* Pods-StackItUp.debug.xcconfig */,
 				F9C622D70622D166B379928B /* Pods-StackItUp.release.xcconfig */,
-				93EB6DBA7863DD4469CF1A69 /* Pods-StackItUp-StackItUpUITests.debug.xcconfig */,
-				947BA78F17576D61F70B7E22 /* Pods-StackItUp-StackItUpUITests.release.xcconfig */,
-				BA7F91569570AB10156AB916 /* Pods-StackItUpTests.debug.xcconfig */,
-				E2A459BD8F63A604F048141C /* Pods-StackItUpTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -243,8 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				A5A094111E00E7D8E8C353F2 /* Pods_StackItUp.framework */,
-				4454AC48CFFC13FC0A3969CB /* Pods_StackItUp_StackItUpUITests.framework */,
-				AB78CDC2AEDF11F0A51564C3 /* Pods_StackItUpTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -276,7 +260,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0490C0CB24087E570093B0BE /* Build configuration list for PBXNativeTarget "StackItUpTests" */;
 			buildPhases = (
-				CED5AE1C965BB3410E248804 /* [CP] Check Pods Manifest.lock */,
 				0490C0B024087E560093B0BE /* Sources */,
 				0490C0B124087E560093B0BE /* Frameworks */,
 				0490C0B224087E560093B0BE /* Resources */,
@@ -295,11 +278,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0490C0CE24087E570093B0BE /* Build configuration list for PBXNativeTarget "StackItUpUITests" */;
 			buildPhases = (
-				A63F7303AD95BD4C4B73DFC5 /* [CP] Check Pods Manifest.lock */,
 				0490C0BB24087E570093B0BE /* Sources */,
 				0490C0BC24087E570093B0BE /* Frameworks */,
 				0490C0BD24087E570093B0BE /* Resources */,
-				2D03CA842A2BA1379A94028B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -400,23 +381,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Type a script or drag a script file from your workspace to insert its path.\n\n#if which swiftlint >/dev/null; then\n#  swiftlint\n#else\n#  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
 		};
-		2D03CA842A2BA1379A94028B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StackItUp-StackItUpUITests/Pods-StackItUp-StackItUpUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StackItUp-StackItUpUITests/Pods-StackItUp-StackItUpUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StackItUp-StackItUpUITests/Pods-StackItUp-StackItUpUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		721EDDF834C7E7DF54013F15 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -433,50 +397,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-StackItUp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A63F7303AD95BD4C4B73DFC5 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-StackItUp-StackItUpUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CED5AE1C965BB3410E248804 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-StackItUpTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -728,7 +648,6 @@
 		};
 		0490C0CC24087E570093B0BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA7F91569570AB10156AB916 /* Pods-StackItUpTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -751,7 +670,6 @@
 		};
 		0490C0CD24087E570093B0BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E2A459BD8F63A604F048141C /* Pods-StackItUpTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -774,7 +692,6 @@
 		};
 		0490C0CF24087E570093B0BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93EB6DBA7863DD4469CF1A69 /* Pods-StackItUp-StackItUpUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -795,7 +712,6 @@
 		};
 		0490C0D024087E570093B0BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 947BA78F17576D61F70B7E22 /* Pods-StackItUp-StackItUpUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
