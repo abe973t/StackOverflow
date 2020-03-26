@@ -11,7 +11,7 @@ import UIKit
 class QuestionView: UIView {
     
     weak var controller: UIViewController?
-    var answers: [NSAttributedString]?
+    var answers: [Answer]?
     var tableViewHeightConstraint: NSLayoutConstraint!
     var questionID: Int!
     
@@ -106,7 +106,7 @@ class QuestionView: UIView {
         self.backgroundColor = .gray
         answersTableView.dataSource = self
         answersTableView.delegate = self
-        answersTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        answersTableView.register(AnswerCell.self, forCellReuseIdentifier: "cell")
         
         addViews()
     }
@@ -206,13 +206,17 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? AnswerCell else {
             return UITableViewCell()
         }
         
-        cell.textLabel?.attributedText = answers?[indexPath.row]
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.sizeToFit()
+        cell.scoreLabel.text = "\(answers?[indexPath.row].score ?? 0)"
+        cell.answerTextLabel.attributedText = answers?[indexPath.row].text?.attributedString
+        if let isAccepted = answers?[indexPath.row].is_accepted, isAccepted {
+            cell.checkMarkImg.image = #imageLiteral(resourceName: "greenCheck")
+        } else if 0 > answers![indexPath.row].score! {
+            cell.votesLabel.isHidden = true
+        }
         
         return cell
     }
@@ -224,7 +228,6 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
 
 @objc extension QuestionView {
     func postAnswer() {
-        // Ask about this design pattern
         guard let answerText = postAnswerTextfield.text, answerText != "" else {
             let alert = UIAlertController(title: "Error", message: "Answer cannot be blank", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))

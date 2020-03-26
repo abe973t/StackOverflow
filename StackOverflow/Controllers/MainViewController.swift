@@ -14,7 +14,6 @@ class MainViewController: UIViewController {
     /**
         TODO:
             - login flow, encrypt pw
-            - show check for best answer
      */
     
     let loginView = LoginView()

@@ -8,7 +8,6 @@
 
 import UIKit
 
-// TODO: find a way to unit test this bit
 // swiftlint:disable trailing_whitespace
 class NetworkManager {
     static let shared = NetworkManager()
@@ -24,7 +23,6 @@ class NetworkManager {
             }
             
             if let data = data {
-//                print(String(decoding: data, as: UTF8.self))
                 completion(data, nil)
             }
         }

@@ -57,10 +57,24 @@ class StackOverflowTests: XCTestCase {
         XCTAssertNoThrow(try JSONDecoder().decode(Question.self, from: jsonData))
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testAPIPerformance() {
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        if let url = URLBuilder.searchQuestion(
+            containing: "UITableview",
+            sortedBy: .activity,
+            displayOrder: .desc) {
+            NetworkManager.shared.get(url: url) { (data, error) in
+                if let error = error {
+                    XCTFail(error.localizedDescription)
+                }
+                
+                semaphore.signal()
+            }
+        }
+        
+        if semaphore.wait(timeout: DispatchTime.now() + .seconds(3)) == .timedOut {
+          XCTFail("This bit timed out")
         }
     }
 }

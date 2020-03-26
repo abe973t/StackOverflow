@@ -94,4 +94,19 @@ class URLBuilder {
 
         return components.url
     }
+    
+    static func fetchAnswersURL(questionID: Int, sorting: Sorting) -> URL? {
+        var components = URLComponents()
+
+        components.scheme = "https"
+        components.host = "api.stackexchange.com"
+        components.path = "/2.2/questions/\(questionID)/answers"
+        components.queryItems = [
+            URLQueryItem(name: "order", value: Order.desc.rawValue),
+            URLQueryItem(name: "sort", value: sorting.rawValue),
+            URLQueryItem(name: "site", value: "stackoverflow")
+        ]
+
+        return components.url
+    }
 }
