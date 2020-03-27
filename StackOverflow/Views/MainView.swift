@@ -7,14 +7,12 @@
 //
 
 import UIKit
-import SafariServices
-import WebKit
 import SwiftSoup
 
 // swiftlint:disable trailing_whitespace
 class MainView: UIView {
     
-    weak var controller: UIViewController?
+    weak var controller: MainViewController?
     var searchController: UISearchController?
     var questionsList = [Question]()
     
@@ -131,6 +129,7 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
             qVC.title = questionTitle
             qVC.questionView.questionID = questionID
             
+            self.controller?.createSpinnerView()
             var answers = [Answer]()
             let group = DispatchGroup()
             group.enter()
@@ -145,58 +144,63 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
                 }
                 group.leave()
             }.resume()
-            group.notify(queue: .main, execute: {
-                URLSession.shared.dataTask(with: questionURL) { data, response, error in
-                    guard let data = data, error == nil else {
-                        print(error!.localizedDescription)
-                        return
-                    }
+            
+            group.wait()
+            group.enter()
+            URLSession.shared.dataTask(with: questionURL) { data, response, error in
+                guard let data = data, error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
 
-                    do {
-                        let html = String(data: data, encoding: .utf8)
-                        let doc: Document = try SwiftSoup.parse(html!)
-                        let questionHTML: Elements = try doc.getElementsByClass("post-text")
-                        let answersHTML: Elements = try doc.getElementsByClass("answercell post-layout--right")
-                        let questionHTMLData = NSString(string: questionHTML.first()!.description).data(using: String.Encoding.utf8.rawValue)
+                do {
+                    let html = String(data: data, encoding: .utf8)
+                    let doc: Document = try SwiftSoup.parse(html!)
+                    let questionHTML: Elements = try doc.getElementsByClass("post-text")
+                    let answersHTML: Elements = try doc.getElementsByClass("answercell post-layout--right")
+                    let questionHTMLData = NSString(string: questionHTML.first()!.description).data(using: String.Encoding.utf8.rawValue)
+                    let options = [
+                        NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
+                    ]
+                    let attributedString = try! NSMutableAttributedString(data: questionHTMLData!, options: options, documentAttributes: nil)
+                    attributedString.addAttributes([
+                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19)
+                    ], range: NSMakeRange(0, attributedString.length))
+                    
+                    for (index, answer) in answersHTML.array().enumerated() {
+                        let answerString = NSString(string: answer.description).data(using: String.Encoding.utf8.rawValue)
                         let options = [
                             NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
                         ]
-                        let attributedString = try! NSMutableAttributedString(data: questionHTMLData!, options: options, documentAttributes: nil)
-                        attributedString.addAttributes([
-                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 19)
-                        ], range: NSMakeRange(0, attributedString.length))
+                        let answerAttributedString = try! NSAttributedString(data: answerString!, options: options, documentAttributes: nil)
                         
-                        for (index, answer) in answersHTML.array().enumerated() {
-                            let answerString = NSString(string: answer.description).data(using: String.Encoding.utf8.rawValue)
-                            let options = [
-                                NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html
-                            ]
-                            let answerAttributedString = try! NSAttributedString(data: answerString!, options: options, documentAttributes: nil)
-                            
-                            answers[index].text = AttributedString(nsAttributedString: answerAttributedString)
-                        }
-                        
-                        DispatchQueue.main.async {
-                            qVC.questionView.questionLabel.attributedText = attributedString
-                            qVC.questionView.questionLabel.sizeToFit()
-                            qVC.questionView.answersCountLabel.text = "\(answers.count) Answers"
-                            
-                            if answers.count == 0 {
-                                qVC.questionView.answersTableView.isHidden = true
-                            } else {
-                                qVC.questionView.answers = answers
-                                qVC.questionView.answersTableView.reloadData()
-                            }
-                            
-                            self.controller?.navigationController?.pushViewController(qVC, animated: true)
-                        }
-                    } catch Exception.Error( _, let message) {
-                        print(message)
-                    } catch {
-                        print("error")
+                        answers[index].text = AttributedString(nsAttributedString: answerAttributedString)
                     }
-                }.resume()
-            })
+                    
+                    DispatchQueue.main.async {
+                        qVC.questionView.questionLabel.attributedText = attributedString
+                        qVC.questionView.questionLabel.sizeToFit()
+                        qVC.questionView.answersCountLabel.text = "\(answers.count) Answers"
+                        
+                        if answers.count == 0 {
+                            qVC.questionView.answersTableView.isHidden = true
+                        } else {
+                            qVC.questionView.answers = answers
+                            qVC.questionView.answersTableView.reloadData()
+                        }
+                        
+                        self.controller?.navigationController?.pushViewController(qVC, animated: true)
+                    }
+                } catch Exception.Error( _, let message) {
+                    print(message)
+                } catch {
+                    print("error")
+                }
+                group.leave()
+            }.resume()
+            group.notify(queue: .main) {
+                self.controller?.removeSpinnerView()
+            }
         }
     }
     

@@ -26,6 +26,7 @@
 		04917C45240DA23D00D66EBF /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04917C44240DA23D00D66EBF /* Question.swift */; };
 		04917C48240DA90E00D66EBF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04917C47240DA90E00D66EBF /* NetworkManager.swift */; };
 		04B580ED242CDF1F00D4300C /* AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B580EC242CDF1F00D4300C /* AttributedString.swift */; };
+		04B97E10242E2B6600B3EBCB /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B97E0F242E2B6600B3EBCB /* SpinnerViewController.swift */; };
 		04D5309A241934A500E5745A /* QuestionJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 04D53099241934A500E5745A /* QuestionJSON.json */; };
 		04D5309C24193C7100E5745A /* CreateQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5309B24193C7100E5745A /* CreateQuestionVC.swift */; };
 		04D5309E24193CBD00E5745A /* CreateQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5309D24193CBD00E5745A /* CreateQuestionView.swift */; };
@@ -78,6 +79,7 @@
 		04917C47240DA90E00D66EBF /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0496EAE324094FAB003B2772 /* StackOverflow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StackOverflow.entitlements; sourceTree = "<group>"; };
 		04B580EC242CDF1F00D4300C /* AttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedString.swift; sourceTree = "<group>"; };
+		04B97E0F242E2B6600B3EBCB /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpinnerViewController.swift; path = StackOverflow/Views/SpinnerViewController.swift; sourceTree = SOURCE_ROOT; };
 		04D53099241934A500E5745A /* QuestionJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = QuestionJSON.json; sourceTree = "<group>"; };
 		04D5309B24193C7100E5745A /* CreateQuestionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionVC.swift; sourceTree = "<group>"; };
 		04D5309D24193CBD00E5745A /* CreateQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionView.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		04917C41240D915F00D66EBF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				04B97E0F242E2B6600B3EBCB /* SpinnerViewController.swift */,
 				0490C0A224087E510093B0BE /* MainViewController.swift */,
 				041A41F6241C5C8C0016C328 /* QuestionViewController.swift */,
 				04D5309B24193C7100E5745A /* CreateQuestionVC.swift */,
@@ -450,6 +453,7 @@
 				0490C0A324087E510093B0BE /* MainViewController.swift in Sources */,
 				0490C09F24087E510093B0BE /* AppDelegate.swift in Sources */,
 				0490C0D52408A8730093B0BE /* MainView.swift in Sources */,
+				04B97E10242E2B6600B3EBCB /* SpinnerViewController.swift in Sources */,
 				04638D15241C22D400B09137 /* Array+Extensions.swift in Sources */,
 				04917C48240DA90E00D66EBF /* NetworkManager.swift in Sources */,
 				048FAD48242B95EE00B806CF /* AnswerResponse.swift in Sources */,

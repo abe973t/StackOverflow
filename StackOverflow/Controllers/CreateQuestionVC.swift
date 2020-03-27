@@ -20,5 +20,4 @@ class CreateQuestionVC: UIViewController {
         view = createQuestionView
         view.backgroundColor = .gray
     }
-    
 }

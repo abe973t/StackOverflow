@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
     
     let loginView = LoginView()
     let mainView = MainView()
+    let child = SpinnerViewController()
     
     let logo: UIImageView = {
         let imgView = UIImageView()
@@ -45,5 +46,20 @@ class MainViewController: UIViewController {
         navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(postQuestionScreen)), animated: true)
         
         view = mainView
+    }
+    
+    func createSpinnerView() {
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    
+    func removeSpinnerView() {
+        DispatchQueue.main.async {
+            self.child.willMove(toParent: nil)
+            self.child.view.removeFromSuperview()
+            self.child.removeFromParent()
+        }
     }
 }
