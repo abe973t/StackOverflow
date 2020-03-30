@@ -16,6 +16,7 @@ class StackOverflowTests: XCTestCase {
     let viewController = MainViewController()
     let questionViewController = QuestionViewController()
     let createQuestionViewController = CreateQuestionVC()
+    let favQuesVC = FavoritesViewController()
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -33,7 +34,20 @@ class StackOverflowTests: XCTestCase {
     
     func testQuestionVCMVVM() {
         XCTAssertNotNil(questionViewController.questionView)
-        viewController.viewDidLoad()
+        questionViewController.viewDidLoad()
+        XCTAssertNotNil(questionViewController.questionView.controller)
+    }
+    
+    func testFavQuestionVCMVVM() {
+        XCTAssertNotNil(favQuesVC.favoritesView)
+        favQuesVC.viewDidLoad()
+        XCTAssertNotNil(favQuesVC.favoritesView.controller)
+    }
+    
+    func testCreateQuestionVCMVVM() {
+        XCTAssertNotNil(createQuestionViewController.createQuestionView)
+        createQuestionViewController.viewDidLoad()
+        XCTAssertNotNil(createQuestionViewController.createQuestionView.controller)
     }
     
     func testSearchQuestionsURL() throws {

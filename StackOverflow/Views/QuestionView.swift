@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RNCryptor
 
 class QuestionView: UIView {
     
@@ -252,7 +253,7 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
             return
         }
         
-        guard let token = UserDefaults.standard.string(forKey: "access_token") else {
+        guard let token = UserDefaults.standard.data(forKey: "access_token") else {
             let alert = UIAlertController(title: "Error", message: "Must have token stored somewhere", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             controller?.present(alert, animated: true, completion: nil)
@@ -261,9 +262,15 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
 
         if let quesID = question.question_id, let url = URLBuilder.createAnswerURL(questionID: quesID) {
             let key = "key=KXri6b9pdb3XETF1TjaH3A(("
-            let tokenComponent = "&access_token=" + token
+            var tokenComponent = "&access_token="
             let site = "&site=stackoverflow.com"
             let body =  "&body=" + answerText.replacingOccurrences(of: " ", with: "%20")
+            do {
+                let tokenData = try RNCryptor.decrypt(data: token, withPassword: Constants.decryptKey.rawValue)
+                tokenComponent.append(contentsOf: String(decoding: tokenData, as: UTF8.self))
+            } catch {
+                print(error.localizedDescription)
+            }
 
             let data = (key + tokenComponent + site + body).data(using: .utf8)
 
@@ -288,7 +295,7 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func upVoteQuestion() {
-        guard let token = UserDefaults.standard.string(forKey: "access_token") else {
+        guard let token = UserDefaults.standard.data(forKey: "access_token") else {
             let alert = UIAlertController(title: "Error", message: "Must have token stored somewhere", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             controller?.present(alert, animated: true, completion: nil)
@@ -297,8 +304,14 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
 
         if let quesID = question.question_id, let url = URLBuilder.upvoteAnswerURL(questionID: quesID) {
             let key = "key=KXri6b9pdb3XETF1TjaH3A(("
-            let tokenComponent = "&access_token=" + token
+            var tokenComponent = "&access_token="
             let site = "&site=stackoverflow.com"
+            do {
+                let tokenData = try RNCryptor.decrypt(data: token, withPassword: Constants.decryptKey.rawValue)
+                tokenComponent.append(contentsOf: String(decoding: tokenData, as: UTF8.self))
+            } catch {
+                print(error.localizedDescription)
+            }
 
             let data = (key + tokenComponent + site).data(using: .utf8)
 
@@ -323,7 +336,7 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func downVoteQuestion() {
-        guard let token = UserDefaults.standard.string(forKey: "access_token") else {
+        guard let token = UserDefaults.standard.data(forKey: "access_token") else {
             let alert = UIAlertController(title: "Error", message: "Must have token stored somewhere", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             controller?.present(alert, animated: true, completion: nil)
@@ -332,8 +345,14 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
 
         if let quesID = question.question_id, let url = URLBuilder.downvoteAnswerURL(questionID: quesID) {
             let key = "key=KXri6b9pdb3XETF1TjaH3A(("
-            let tokenComponent = "&access_token=" + token
+            var tokenComponent = "&access_token="
             let site = "&site=stackoverflow.com"
+            do {
+                let tokenData = try RNCryptor.decrypt(data: token, withPassword: Constants.decryptKey.rawValue)
+                tokenComponent.append(contentsOf: String(decoding: tokenData, as: UTF8.self))
+            } catch {
+                print(error.localizedDescription)
+            }
 
             let data = (key + tokenComponent + site).data(using: .utf8)
 

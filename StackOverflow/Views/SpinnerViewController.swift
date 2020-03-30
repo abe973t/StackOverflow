@@ -10,7 +10,7 @@ import UIKit
 import NVActivityIndicatorView
 
 class SpinnerViewController: UIViewController {
-    var spinner = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), type: .ballRotateChase, color: .black, padding: 10)
+    var spinner = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), type: .ballRotateChase, color: .systemBlue, padding: 10)
 
     override func loadView() {
         view = UIView()

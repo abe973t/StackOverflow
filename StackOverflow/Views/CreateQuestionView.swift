@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RNCryptor
 
 // swiftlint:disable trailing_whitespace
 // swiftlint:disable line_length
@@ -150,14 +151,28 @@ class CreateQuestionView: UIView {
             return
         }
         
+        guard let token = UserDefaults.standard.data(forKey: "access_token") else {
+            let alert = UIAlertController(title: "Error", message: "Must have token stored somewhere", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            controller?.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         if let url = URLBuilder.createQuestionURL() {
             let key = "key=KXri6b9pdb3XETF1TjaH3A(("
-            let token = "&access_token=" + (UserDefaults.standard.string(forKey: "access_token") ?? "")
+            var tokenComponent = "&access_token="
             let site = "&site=stackoverflow.com"
             let title = "&title=" + titleText.replacingOccurrences(of: " ", with: "%20")
             let body =  "&body=" + bodyText.replacingOccurrences(of: " ", with: "%20")
             let tags = "&tags=" + tagsText
-            let data = (key + token + site + title + body + tags).data(using: .utf8)
+            do {
+                let tokenData = try RNCryptor.decrypt(data: token, withPassword: Constants.decryptKey.rawValue)
+                tokenComponent.append(contentsOf: String(decoding: tokenData, as: UTF8.self))
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            let data = (key + tokenComponent + site + title + body + tags).data(using: .utf8)
 
             NetworkManager.shared.post(url: url, data: data, completion: { (data, error) in
                 var alertMessage = ""
