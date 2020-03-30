@@ -36,14 +36,13 @@ class MainViewController: UIViewController {
         loginView.controller = self
     }
     
-    @objc func postQuestionScreen() {
-        navigationController?.pushViewController(CreateQuestionVC(), animated: true)
-    }
-    
     func loadMainScreen() {
+        let addQuestionButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(postQuestionScreen))
+        let accessFavButton = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(postFavoritesScreen))
+        
         mainView.controller = self
         mainView.configureSearchBar()
-        navigationItem.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(postQuestionScreen)), animated: true)
+        navigationItem.setRightBarButtonItems([addQuestionButton, accessFavButton], animated: true)
         
         view = mainView
     }
@@ -61,5 +60,15 @@ class MainViewController: UIViewController {
             self.child.view.removeFromSuperview()
             self.child.removeFromParent()
         }
+    }
+}
+
+@objc extension MainViewController {
+    func postQuestionScreen() {
+        navigationController?.pushViewController(CreateQuestionVC(), animated: true)
+    }
+    
+    func postFavoritesScreen() {
+        navigationController?.pushViewController(FavoritesViewController(), animated: true)
     }
 }

@@ -13,7 +13,7 @@ class QuestionView: UIView {
     weak var controller: UIViewController?
     var answers: [Answer]?
     var tableViewHeightConstraint: NSLayoutConstraint!
-    var questionID: Int!
+    var question: Question!
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -57,6 +57,7 @@ class QuestionView: UIView {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(#imageLiteral(resourceName: "star-2"), for: .normal)
+        btn.addTarget(self, action: #selector(addFavoriteQuestion), for: .touchUpInside)
         return btn
     }()
     
@@ -214,7 +215,7 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
         cell.answerTextLabel.attributedText = answers?[indexPath.row].text?.attributedString
         if let isAccepted = answers?[indexPath.row].is_accepted, isAccepted {
             cell.checkMarkImg.image = #imageLiteral(resourceName: "greenCheck")
-        } else if 0 > answers![indexPath.row].score! {
+        } else if 0 >= answers![indexPath.row].score ?? 0 {
             cell.votesLabel.isHidden = true
         }
         
@@ -227,6 +228,21 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
 }
 
 @objc extension QuestionView {
+    func addFavoriteQuestion() {
+        guard let quesLink = question.link, let quesTitle = question.title, let quesID = question.question_id else {
+            print("fav question failed")
+            return
+        }
+        
+        let favQuestion = FavQuestion(context: CoreDataManager.shared.mainContext)
+        favQuestion.url = quesLink
+        favQuestion.title = quesTitle
+        favQuestion.quesID = Int64(quesID)
+        CoreDataManager.shared.saveContext(context: CoreDataManager.shared.mainContext)
+        
+        favButton.setImage(#imageLiteral(resourceName: "star"), for: .normal)
+    }
+    
     func postAnswer() {
         guard let answerText = postAnswerTextfield.text, answerText != "" else {
             let alert = UIAlertController(title: "Error", message: "Answer cannot be blank", preferredStyle: .alert)
@@ -242,7 +258,7 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
             return
         }
 
-        if let url = URLBuilder.createAnswerURL(questionID: questionID) {
+        if let quesID = question.question_id, let url = URLBuilder.createAnswerURL(questionID: quesID) {
             let key = "key=KXri6b9pdb3XETF1TjaH3A(("
             let tokenComponent = "&access_token=" + token
             let site = "&site=stackoverflow.com"
@@ -278,7 +294,7 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
             return
         }
 
-        if let url = URLBuilder.upvoteAnswerURL(questionID: questionID) {
+        if let quesID = question.question_id, let url = URLBuilder.upvoteAnswerURL(questionID: quesID) {
             let key = "key=KXri6b9pdb3XETF1TjaH3A(("
             let tokenComponent = "&access_token=" + token
             let site = "&site=stackoverflow.com"
@@ -313,7 +329,7 @@ extension QuestionView: UITableViewDataSource, UITableViewDelegate {
             return
         }
 
-        if let url = URLBuilder.downvoteAnswerURL(questionID: questionID) {
+        if let quesID = question.question_id, let url = URLBuilder.downvoteAnswerURL(questionID: quesID) {
             let key = "key=KXri6b9pdb3XETF1TjaH3A(("
             let tokenComponent = "&access_token=" + token
             let site = "&site=stackoverflow.com"

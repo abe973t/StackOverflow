@@ -60,7 +60,6 @@ extension LoginView: WKNavigationDelegate {
         if let url = webView.url, url.absoluteString.contains("access_token") {
             // store token
             let token = url.absoluteString.substring(with: 59..<83)
-            print(token)
             let defaults = UserDefaults.standard
             
             defaults.set(token, forKey: "access_token")

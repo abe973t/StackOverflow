@@ -11,6 +11,11 @@
 		041A41F7241C5C8C0016C328 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041A41F6241C5C8C0016C328 /* QuestionViewController.swift */; };
 		04638D12241C179900B09137 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04638D11241C179900B09137 /* String+Extensions.swift */; };
 		04638D15241C22D400B09137 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04638D14241C22D400B09137 /* Array+Extensions.swift */; };
+		047B4E1224317F50003355E0 /* CoreDataFetchOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B4E1124317F4F003355E0 /* CoreDataFetchOps.swift */; };
+		047B4E1424317F57003355E0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B4E1324317F57003355E0 /* CoreDataManager.swift */; };
+		047B4E1624317F5F003355E0 /* CoreDataSaveOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B4E1524317F5E003355E0 /* CoreDataSaveOps.swift */; };
+		047B4E19243180F2003355E0 /* CoreDataDeleteOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B4E18243180F2003355E0 /* CoreDataDeleteOps.swift */; };
+		047B4E1B24318146003355E0 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B4E1A24318146003355E0 /* OSLog+Extensions.swift */; };
 		048FAD45242B870E00B806CF /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FAD44242B870E00B806CF /* AnswerCell.swift */; };
 		048FAD48242B95EE00B806CF /* AnswerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FAD47242B95EE00B806CF /* AnswerResponse.swift */; };
 		0490C09F24087E510093B0BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C09E24087E510093B0BE /* AppDelegate.swift */; };
@@ -32,6 +37,8 @@
 		04D5309E24193CBD00E5745A /* CreateQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5309D24193CBD00E5745A /* CreateQuestionView.swift */; };
 		04EF46F32415E2F800254F70 /* StackItUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04EF46F12415E2F800254F70 /* StackItUp.xcdatamodeld */; };
 		04F713EB241BC1160098ACDE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F713EA241BC1160098ACDE /* LoginView.swift */; };
+		04F98149243175E000BEE882 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F98148243175E000BEE882 /* FavoritesViewController.swift */; };
+		04F9814B24317AEF00BEE882 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F9814A24317AEF00BEE882 /* FavoriteView.swift */; };
 		298028896CD43A6E978753E5 /* Pods_StackItUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A094111E00E7D8E8C353F2 /* Pods_StackItUp.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +64,11 @@
 		041A41F6241C5C8C0016C328 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuestionViewController.swift; path = StackOverflow/Views/QuestionViewController.swift; sourceTree = SOURCE_ROOT; };
 		04638D11241C179900B09137 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		04638D14241C22D400B09137 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		047B4E1124317F4F003355E0 /* CoreDataFetchOps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataFetchOps.swift; sourceTree = "<group>"; };
+		047B4E1324317F57003355E0 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		047B4E1524317F5E003355E0 /* CoreDataSaveOps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataSaveOps.swift; sourceTree = "<group>"; };
+		047B4E18243180F2003355E0 /* CoreDataDeleteOps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDeleteOps.swift; sourceTree = "<group>"; };
+		047B4E1A24318146003355E0 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		048FAD44242B870E00B806CF /* AnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCell.swift; sourceTree = "<group>"; };
 		048FAD47242B95EE00B806CF /* AnswerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerResponse.swift; sourceTree = "<group>"; };
 		0490C09B24087E510093B0BE /* StackItUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackItUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +97,8 @@
 		04D5309D24193CBD00E5745A /* CreateQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuestionView.swift; sourceTree = "<group>"; };
 		04EF46F22415E2F800254F70 /* StackOverflow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StackOverflow.xcdatamodel; sourceTree = "<group>"; };
 		04F713EA241BC1160098ACDE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = StackOverflow/Views/LoginView.swift; sourceTree = SOURCE_ROOT; };
+		04F98148243175E000BEE882 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		04F9814A24317AEF00BEE882 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		07F1CFF7ED681D51C48F2067 /* Pods-StackItUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackItUp.debug.xcconfig"; path = "Target Support Files/Pods-StackItUp/Pods-StackItUp.debug.xcconfig"; sourceTree = "<group>"; };
 		A5A094111E00E7D8E8C353F2 /* Pods_StackItUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StackItUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9C622D70622D166B379928B /* Pods-StackItUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StackItUp.release.xcconfig"; path = "Target Support Files/Pods-StackItUp/Pods-StackItUp.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,9 +134,22 @@
 			isa = PBXGroup;
 			children = (
 				04638D14241C22D400B09137 /* Array+Extensions.swift */,
+				047B4E1A24318146003355E0 /* OSLog+Extensions.swift */,
 				04638D11241C179900B09137 /* String+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		047B4E1724317F69003355E0 /* Core Data Stack */ = {
+			isa = PBXGroup;
+			children = (
+				047B4E18243180F2003355E0 /* CoreDataDeleteOps.swift */,
+				047B4E1124317F4F003355E0 /* CoreDataFetchOps.swift */,
+				047B4E1324317F57003355E0 /* CoreDataManager.swift */,
+				047B4E1524317F5E003355E0 /* CoreDataSaveOps.swift */,
+				04EF46F12415E2F800254F70 /* StackItUp.xcdatamodeld */,
+			);
+			path = "Core Data Stack";
 			sourceTree = "<group>";
 		};
 		048FAD46242B871400B806CF /* Cells */ = {
@@ -168,9 +195,9 @@
 				04917C43240D918100D66EBF /* Tools */,
 				04638D13241C188600B09137 /* Extensions */,
 				0490C0AA24087E560093B0BE /* Assets.xcassets */,
+				047B4E1724317F69003355E0 /* Core Data Stack */,
 				0490C0AC24087E560093B0BE /* LaunchScreen.storyboard */,
 				0490C0AF24087E560093B0BE /* Info.plist */,
-				04EF46F12415E2F800254F70 /* StackItUp.xcdatamodeld */,
 			);
 			path = StackOverflow;
 			sourceTree = "<group>";
@@ -198,6 +225,7 @@
 			children = (
 				04B97E0F242E2B6600B3EBCB /* SpinnerViewController.swift */,
 				0490C0A224087E510093B0BE /* MainViewController.swift */,
+				04F98148243175E000BEE882 /* FavoritesViewController.swift */,
 				041A41F6241C5C8C0016C328 /* QuestionViewController.swift */,
 				04D5309B24193C7100E5745A /* CreateQuestionVC.swift */,
 			);
@@ -209,6 +237,7 @@
 			children = (
 				04F713EA241BC1160098ACDE /* LoginView.swift */,
 				0490C0D42408A8730093B0BE /* MainView.swift */,
+				04F9814A24317AEF00BEE882 /* FavoriteView.swift */,
 				041A41F4241C5C6F0016C328 /* QuestionView.swift */,
 				04D5309D24193CBD00E5745A /* CreateQuestionView.swift */,
 				048FAD46242B871400B806CF /* Cells */,
@@ -452,19 +481,26 @@
 				04638D12241C179900B09137 /* String+Extensions.swift in Sources */,
 				0490C0A324087E510093B0BE /* MainViewController.swift in Sources */,
 				0490C09F24087E510093B0BE /* AppDelegate.swift in Sources */,
+				047B4E1624317F5F003355E0 /* CoreDataSaveOps.swift in Sources */,
 				0490C0D52408A8730093B0BE /* MainView.swift in Sources */,
 				04B97E10242E2B6600B3EBCB /* SpinnerViewController.swift in Sources */,
 				04638D15241C22D400B09137 /* Array+Extensions.swift in Sources */,
+				047B4E1224317F50003355E0 /* CoreDataFetchOps.swift in Sources */,
 				04917C48240DA90E00D66EBF /* NetworkManager.swift in Sources */,
 				048FAD48242B95EE00B806CF /* AnswerResponse.swift in Sources */,
+				047B4E19243180F2003355E0 /* CoreDataDeleteOps.swift in Sources */,
 				04D5309C24193C7100E5745A /* CreateQuestionVC.swift in Sources */,
 				04F713EB241BC1160098ACDE /* LoginView.swift in Sources */,
 				04EF46F32415E2F800254F70 /* StackItUp.xcdatamodeld in Sources */,
 				041A41F5241C5C6F0016C328 /* QuestionView.swift in Sources */,
 				048FAD45242B870E00B806CF /* AnswerCell.swift in Sources */,
+				047B4E1B24318146003355E0 /* OSLog+Extensions.swift in Sources */,
 				041A41F7241C5C8C0016C328 /* QuestionViewController.swift in Sources */,
+				047B4E1424317F57003355E0 /* CoreDataManager.swift in Sources */,
+				04F9814B24317AEF00BEE882 /* FavoriteView.swift in Sources */,
 				0490C0A124087E510093B0BE /* SceneDelegate.swift in Sources */,
 				04917C45240DA23D00D66EBF /* Question.swift in Sources */,
+				04F98149243175E000BEE882 /* FavoritesViewController.swift in Sources */,
 				0490C0D72408B4380093B0BE /* URLBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

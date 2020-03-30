@@ -1,41 +1,35 @@
 //
-//  MainView.swift
-//  StackOverflow
+//  FavoriteView.swift
+//  StackItUp
 //
-//  Created by mcs on 2/27/20.
+//  Created by mcs on 3/29/20.
 //  Copyright © 2020 MCS. All rights reserved.
 //
 
 import UIKit
 import SwiftSoup
 
-// swiftlint:disable trailing_whitespace
-class MainView: UIView {
-    
-    weak var controller: MainViewController?
-    var searchController: UISearchController?
-    var questionsList = [Question]()
+class FavoriteView: UIView {
+        
+    weak var controller: FavoritesViewController?
+    var favoriteQuestions: [FavQuestion]?
     
     let tableView: UITableView = {
         let tblView = UITableView()
         tblView.translatesAutoresizingMaskIntoConstraints = false
         return tblView
     }()
-    
-    let searchBarView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = .white
+//        CoreDataDeleteOps.shared.deleteQuestion(ques: nil)
+        
+        addViews()
+        favoriteQuestions = CoreDataFetchOps.shared.fetchQuestion()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
-        addViews()        
     }
     
     required init?(coder: NSCoder) {
@@ -43,20 +37,14 @@ class MainView: UIView {
     }
     
     func addViews() {
-        addSubview(searchBarView)
         addSubview(tableView)
         
         addContraints()
     }
-    
+
     func addContraints() {
         NSLayoutConstraint.activate([
-            searchBarView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            searchBarView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            searchBarView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            searchBarView.heightAnchor.constraint(equalToConstant: 55),
-            
-            tableView.topAnchor.constraint(equalTo: searchBarView.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -64,53 +52,10 @@ class MainView: UIView {
     }
 }
 
-extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
-    func configureSearchBar() {
-        searchController = UISearchController(searchResultsController: nil)
-        
-        searchController!.searchResultsUpdater = self
-        searchController!.hidesNavigationBarDuringPresentation = false
-        searchController!.automaticallyShowsCancelButton = false
-        searchController!.delegate = self
-        searchController!.searchBar.searchBarStyle = .minimal
-        searchController!.searchBar.sizeToFit()
-        searchController!.searchBar.showsCancelButton = true
-        searchController!.searchBar.delegate = self
-        searchController!.searchBar.barStyle = .default
-        searchController!.searchBar.showsCancelButton = false
-        searchController?.searchBar.placeholder = "Enter stressor..."
-        
-        searchBarView.addSubview(searchController!.searchBar)
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        if let text = searchController.searchBar.text, !text.isEmpty {
-            if let url = URLBuilder.searchQuestion(
-                containing: text,
-                sortedBy: .activity,
-                displayOrder: .desc) {
-                NetworkManager.shared.get(url: url) { (data, error) in
-                    if let data = data {
-                        do {
-                            let response = try JSONDecoder().decode(SOResponse.self, from: data)
-                            self.questionsList = response.items ?? []
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        } catch {
-                            print(error.localizedDescription)
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 
-
-extension MainView: UITableViewDataSource, UITableViewDelegate {
+extension FavoriteView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questionsList.count
+        return favoriteQuestions?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,21 +64,22 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
         }
         
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = self.questionsList[indexPath.row].title!
+        cell.textLabel?.text = self.favoriteQuestions![indexPath.row].title!
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let questionLink = questionsList[indexPath.row].link, let questionURL = URL(string: questionLink), let questionTitle = questionsList[indexPath.row].title, let questionID = questionsList[indexPath.row].question_id {
+        if let questionLink = favoriteQuestions![indexPath.row].url, let questionURL = URL(string: questionLink), let questionTitle = favoriteQuestions![indexPath.row].title {
             let qVC = QuestionViewController()
+            let questionID = favoriteQuestions![indexPath.row].quesID
             qVC.title = questionTitle
             
             self.controller?.createSpinnerView()
             var answers = [Answer]()
             let group = DispatchGroup()
             group.enter()
-            URLSession.shared.dataTask(with: URLBuilder.fetchAnswersURL(questionID: questionID, sorting: .activity)!) { data, response, error in
+            URLSession.shared.dataTask(with: URLBuilder.fetchAnswersURL(questionID: Int(questionID), sorting: .activity)!) { data, response, error in
                 if let data = data {
                     do {
                         let answersResponse = try JSONDecoder().decode(AnswerResponse.self, from: data)
@@ -174,11 +120,16 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
                         ]
                         let answerAttributedString = try! NSAttributedString(data: answerString!, options: options, documentAttributes: nil)
                         
-                        answers[index].text = AttributedString(nsAttributedString: answerAttributedString)
+                        if answers.count != answersHTML.count {
+                            answers.append(Answer(owner: nil, is_accepted: nil, score: nil, last_activity_date: nil, creation_date: nil, answer_id: nil, question_id: nil, text: AttributedString(nsAttributedString: answerAttributedString)))
+                        } else {
+                            answers[index].text = AttributedString(nsAttributedString: answerAttributedString)
+                        }
                     }
                     
                     DispatchQueue.main.async {
-                        qVC.questionView.question = self.questionsList[indexPath.row]
+                        let question = Question(tags: nil, owner: nil, is_answered: nil, view_count: nil, accepted_answer_id: nil, answer_count: nil, score: nil, last_activity_date: nil, creation_date: nil, last_edit_date: nil, question_id: Int(questionID), link: questionLink, title: questionTitle)
+                        qVC.questionView.question = question
                         qVC.questionView.questionLabel.attributedText = attributedString
                         qVC.questionView.questionLabel.sizeToFit()
                         qVC.questionView.answersCountLabel.text = "\(answers.count) Answers"
@@ -207,7 +158,7 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
             }.resume()
             group.notify(queue: .main) {
                 self.controller?.removeSpinnerView()
-            }            
+            }
         }
     }
     
