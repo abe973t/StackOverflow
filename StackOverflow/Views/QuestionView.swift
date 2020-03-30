@@ -89,6 +89,7 @@ class QuestionView: UIView {
         let txtView = UITextView()
         txtView.translatesAutoresizingMaskIntoConstraints = false
         txtView.layer.cornerRadius = 5
+        txtView.backgroundColor = .systemGray2
         return txtView
     }()
 
@@ -104,7 +105,7 @@ class QuestionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .gray
+        self.backgroundColor = .systemGray
         answersTableView.dataSource = self
         answersTableView.delegate = self
         answersTableView.register(AnswerCell.self, forCellReuseIdentifier: "cell")

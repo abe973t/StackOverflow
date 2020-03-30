@@ -72,11 +72,9 @@ extension MainView: UISearchResultsUpdating, UISearchControllerDelegate, UISearc
         searchController!.hidesNavigationBarDuringPresentation = false
         searchController!.automaticallyShowsCancelButton = false
         searchController!.delegate = self
-        searchController!.searchBar.searchBarStyle = .minimal
         searchController!.searchBar.sizeToFit()
         searchController!.searchBar.showsCancelButton = true
         searchController!.searchBar.delegate = self
-        searchController!.searchBar.barStyle = .default
         searchController!.searchBar.showsCancelButton = false
         searchController?.searchBar.placeholder = "Enter stressor..."
         

@@ -16,6 +16,8 @@
 		047B4E1624317F5F003355E0 /* CoreDataSaveOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B4E1524317F5E003355E0 /* CoreDataSaveOps.swift */; };
 		047B4E19243180F2003355E0 /* CoreDataDeleteOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B4E18243180F2003355E0 /* CoreDataDeleteOps.swift */; };
 		047B4E1B24318146003355E0 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B4E1A24318146003355E0 /* OSLog+Extensions.swift */; };
+		047B4E1D2431A00E003355E0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B4E1C2431A00E003355E0 /* SettingsViewController.swift */; };
+		047B4E1F2431A028003355E0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B4E1E2431A028003355E0 /* SettingsView.swift */; };
 		048FAD45242B870E00B806CF /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FAD44242B870E00B806CF /* AnswerCell.swift */; };
 		048FAD48242B95EE00B806CF /* AnswerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FAD47242B95EE00B806CF /* AnswerResponse.swift */; };
 		0490C09F24087E510093B0BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C09E24087E510093B0BE /* AppDelegate.swift */; };
@@ -69,6 +71,8 @@
 		047B4E1524317F5E003355E0 /* CoreDataSaveOps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataSaveOps.swift; sourceTree = "<group>"; };
 		047B4E18243180F2003355E0 /* CoreDataDeleteOps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDeleteOps.swift; sourceTree = "<group>"; };
 		047B4E1A24318146003355E0 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
+		047B4E1C2431A00E003355E0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		047B4E1E2431A028003355E0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = StackOverflow/Views/SettingsView.swift; sourceTree = SOURCE_ROOT; };
 		048FAD44242B870E00B806CF /* AnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCell.swift; sourceTree = "<group>"; };
 		048FAD47242B95EE00B806CF /* AnswerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerResponse.swift; sourceTree = "<group>"; };
 		0490C09B24087E510093B0BE /* StackItUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackItUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +229,7 @@
 			children = (
 				04B97E0F242E2B6600B3EBCB /* SpinnerViewController.swift */,
 				0490C0A224087E510093B0BE /* MainViewController.swift */,
+				047B4E1C2431A00E003355E0 /* SettingsViewController.swift */,
 				04F98148243175E000BEE882 /* FavoritesViewController.swift */,
 				041A41F6241C5C8C0016C328 /* QuestionViewController.swift */,
 				04D5309B24193C7100E5745A /* CreateQuestionVC.swift */,
@@ -237,6 +242,7 @@
 			children = (
 				04F713EA241BC1160098ACDE /* LoginView.swift */,
 				0490C0D42408A8730093B0BE /* MainView.swift */,
+				047B4E1E2431A028003355E0 /* SettingsView.swift */,
 				04F9814A24317AEF00BEE882 /* FavoriteView.swift */,
 				041A41F4241C5C6F0016C328 /* QuestionView.swift */,
 				04D5309D24193CBD00E5745A /* CreateQuestionView.swift */,
@@ -497,11 +503,13 @@
 				047B4E1B24318146003355E0 /* OSLog+Extensions.swift in Sources */,
 				041A41F7241C5C8C0016C328 /* QuestionViewController.swift in Sources */,
 				047B4E1424317F57003355E0 /* CoreDataManager.swift in Sources */,
+				047B4E1F2431A028003355E0 /* SettingsView.swift in Sources */,
 				04F9814B24317AEF00BEE882 /* FavoriteView.swift in Sources */,
 				0490C0A124087E510093B0BE /* SceneDelegate.swift in Sources */,
 				04917C45240DA23D00D66EBF /* Question.swift in Sources */,
 				04F98149243175E000BEE882 /* FavoritesViewController.swift in Sources */,
 				0490C0D72408B4380093B0BE /* URLBuilder.swift in Sources */,
+				047B4E1D2431A00E003355E0 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

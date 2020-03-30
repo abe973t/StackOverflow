@@ -18,6 +18,6 @@ class CreateQuestionVC: UIViewController {
         title = "Ask a Question"
         createQuestionView.controller = self
         view = createQuestionView
-        view.backgroundColor = .gray
+        view.backgroundColor = .systemGray
     }
 }

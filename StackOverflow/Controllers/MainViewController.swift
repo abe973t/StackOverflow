@@ -19,19 +19,11 @@ class MainViewController: UIViewController {
     let loginView = LoginView()
     let mainView = MainView()
     let child = SpinnerViewController()
-    
-    let logo: UIImageView = {
-        let imgView = UIImageView()
-        imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.contentMode = .scaleAspectFit
-        imgView.image = #imageLiteral(resourceName: "stackoverflow")
-        return imgView
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view = loginView
-        navigationItem.titleView = logo
+        title = "StackOverflow"
         
         loginView.controller = self
     }
